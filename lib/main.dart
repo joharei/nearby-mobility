@@ -1,7 +1,9 @@
-import 'dart:developer' as developer;
+import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nearby_mobility/icons.dart';
+import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nearby_mobility/models/ryde_response.dart';
 import 'package:nearby_mobility/repository.dart';
 import 'package:wear/wear.dart';
@@ -13,13 +15,22 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
+// Centered on the Stavanger/Sandnes area
+const initialPosition = CameraPosition(
+  target: LatLng(58.9109397, 5.7244898),
+  zoom: 11.5,
+);
+
 class _MyAppState extends State<MyApp> {
+  final _controller = Completer<GoogleMapController>();
   Future<RydeResponse> futureScooters;
+  bool myLocationEnabled = false;
 
   @override
   void initState() {
     super.initState();
     futureScooters = fetchScooters();
+    _initCurrentLocation();
   }
 
   @override
@@ -39,34 +50,38 @@ class _MyAppState extends State<MyApp> {
           ),
           themeMode: mode == Mode.active ? ThemeMode.light : ThemeMode.dark,
           home: Scaffold(
-            body: FutureBuilder(
-              future: futureScooters,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data.scooters.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                          leading: Icon(MyIcons.electric_scooter),
-                          title: Text(snapshot.data.scooters[index].distance
-                              .toString()));
-                    },
-                  );
-                }
-                if (snapshot.hasError) {
-                  developer.log(
-                    'Failed to load scooters',
-                    name: 'nearby_mobility',
-                    error: snapshot.error.toString(),
-                  );
-                  return Center(child: Text('Failed to get scooters'));
-                }
-                return Center(child: CircularProgressIndicator());
+            body: GoogleMap(
+              initialCameraPosition: initialPosition,
+              myLocationEnabled: myLocationEnabled,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
               },
             ),
           ),
         );
       },
     );
+  }
+
+  _initCurrentLocation() async {
+    try {
+      final geolocator = Geolocator();
+      var geolocationStatus =
+          await geolocator.checkGeolocationPermissionStatus();
+      bool granted = geolocationStatus == GeolocationStatus.granted;
+      if (mounted) {
+        setState(() {
+          myLocationEnabled = granted;
+        });
+      }
+      if (granted) {
+        final position = await geolocator.getCurrentPosition();
+        final controller = await _controller.future;
+        if (mounted) {
+          controller.animateCamera(CameraUpdate.newLatLngZoom(
+              LatLng(position.latitude, position.longitude), 16));
+        }
+      }
+    } on PlatformException {}
   }
 }
