@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:nearby_mobility/icons.dart';
 import 'package:nearby_mobility/models/ryde_response.dart';
 import 'package:nearby_mobility/repository.dart';
 import 'package:wear/wear.dart';
@@ -46,6 +47,7 @@ class _MyAppState extends State<MyApp> {
                     itemCount: snapshot.data.scooters.length,
                     itemBuilder: (context, index) {
                       return ListTile(
+                          leading: Icon(MyIcons.electric_scooter),
                           title: Text(snapshot.data.scooters[index].distance
                               .toString()));
                     },
