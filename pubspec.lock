@@ -166,9 +166,11 @@ packages:
   wear:
     dependency: "direct main"
     description:
-      path: "../../flutter_wear_plugin"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "095d9d195ea613eda73fbdae77def204853291fa"
+      url: "https://github.com/joharei/flutter_wear_plugin.git"
+    source: git
     version: "0.0.3"
 sdks:
   dart: ">=2.7.0 <3.0.0"

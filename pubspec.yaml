@@ -25,7 +25,8 @@ dependencies:
     sdk: flutter
 
   wear:
-    path: ../../flutter_wear_plugin
+    git:
+      url: https://github.com/joharei/flutter_wear_plugin.git
   http: ^0.12.1
 
 
