@@ -26,6 +26,7 @@ dependencies:
 
   wear:
     path: ../../flutter_wear_plugin
+  http: ^0.12.1
 
 
   # The following adds the Cupertino Icons font to your application.
