@@ -61,23 +61,25 @@ class _MapPageState extends State<MapPage> {
   _initCurrentLocation() async {
     try {
       final geolocator = Geolocator();
-      var geolocationStatus =
-          await geolocator.checkGeolocationPermissionStatus();
-      bool granted = geolocationStatus == GeolocationStatus.granted;
+      final position = await geolocator.getCurrentPosition();
+      final controller = await _controller.future;
       if (mounted) {
-        setState(() {
-          myLocationEnabled = granted;
-        });
-      }
-      if (granted) {
-        final position = await geolocator.getCurrentPosition();
-        final controller = await _controller.future;
+        controller.animateCamera(CameraUpdate.newLatLngZoom(
+          LatLng(position.latitude, position.longitude),
+          15,
+        ));
+
+        var geolocationStatus =
+            await geolocator.checkGeolocationPermissionStatus();
         if (mounted) {
-          controller.animateCamera(CameraUpdate.newLatLngZoom(
-              LatLng(position.latitude, position.longitude), 16));
+          setState(() {
+            myLocationEnabled = geolocationStatus == GeolocationStatus.granted;
+          });
         }
       }
-    } on PlatformException {}
+    } on PlatformException catch (error) {
+      developer.log("Couldn't get location", error: error);
+    }
   }
 
   Marker _bitmapToMarker(Uint8List bitmap, Scooter scooter) {
