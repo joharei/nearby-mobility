@@ -9,7 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nearby_mobility/marker_generator.dart';
 import 'package:nearby_mobility/marker_widget.dart';
 import 'package:nearby_mobility/models/scooter.dart';
-import 'package:nearby_mobility/repository.dart';
+import 'package:nearby_mobility/repository.dart' as Repository;
 
 class MapPage extends StatefulWidget {
   @override
@@ -25,37 +25,43 @@ const initialPosition = CameraPosition(
 class _MapPageState extends State<MapPage> {
   final _controller = Completer<GoogleMapController>();
   bool myLocationEnabled = false;
-  Set<Marker> markers = Set();
+  Uint8List scooterMarkerIcon;
 
   @override
   void initState() {
     super.initState();
-    fetchScooters().then((value) {
-      MarkerGenerator([MarkerWidget()], (bitmaps) {
-        developer.log('Got bitmaps');
-        if (mounted) {
-          setState(() {
-            markers = value.scooters
-                .map((scooter) => _bitmapToMarker(bitmaps[0], scooter))
-                .toSet();
-          });
-        }
-      }).generate(context);
-    }).catchError((error) =>
-        developer.log('Failed to show scooters', error: error.toString()));
+    MarkerGenerator([MarkerWidget()], (bitmaps) {
+      if (mounted) {
+        setState(() {
+          scooterMarkerIcon = bitmaps[0];
+        });
+      }
+    }).generate(context);
     _initCurrentLocation();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-      initialCameraPosition: initialPosition,
-      myLocationEnabled: myLocationEnabled,
-      onMapCreated: (GoogleMapController controller) {
-        _controller.complete(controller);
-      },
-      markers: markers,
-    );
+    return StreamBuilder<Set<Marker>>(
+        stream: Repository.scootersStream.map((scooters) => scooters
+            .map((scooter) => _bitmapToMarker(scooterMarkerIcon, scooter))
+            .toSet()),
+        builder: (context, snapshot) {
+          return GoogleMap(
+            initialCameraPosition: initialPosition,
+            myLocationEnabled: myLocationEnabled,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+            markers: snapshot.data,
+            padding: EdgeInsets.all(8),
+            onCameraIdle: () {
+              _controller.future
+                  .then((controller) => controller.getVisibleRegion())
+                  .then(Repository.visibleRegion.add);
+            },
+          );
+        });
   }
 
   _initCurrentLocation() async {
