@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nearby_mobility/ambient_page.dart';
 import 'package:nearby_mobility/map_page.dart';
 import 'package:wear/wear.dart';
 
@@ -28,11 +29,11 @@ class _MyAppState extends State<MyApp> {
           ),
           themeMode: mode == Mode.active ? ThemeMode.light : ThemeMode.dark,
           home: Scaffold(
-            body: Container(
-              child: Stack(
-                children: [MapPage()],
-              ),
-            ),
+            body: mode == Mode.ambient
+                ? AmbientPage()
+                : Stack(
+                    children: [MapPage()],
+                  ),
           ),
         );
       },

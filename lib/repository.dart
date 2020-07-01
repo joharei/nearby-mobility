@@ -10,7 +10,16 @@ import 'package:nearby_mobility/models/ryde_response.dart';
 import 'package:nearby_mobility/models/scooter.dart';
 import 'package:rxdart/rxdart.dart';
 
-Future<RydeResponse> _fetchScooters(LatLngBounds bounds) async {
+Future<List<Scooter>> get nearbyScooters async {
+  final position = await Geolocator().getLastKnownPosition(
+      locationPermissionLevel: GeolocationPermission.locationWhenInUse);
+
+  return (await _fetchScooters(
+          LatLng(position.latitude, position.longitude), 1))
+      .scooters;
+}
+
+Future<RydeResponse> _fetchScootersFromBounds(LatLngBounds bounds) async {
   final center = LatLng(
     (bounds.southwest.latitude + bounds.northeast.latitude) / 2,
     (bounds.southwest.longitude + bounds.northeast.longitude) / 2,
@@ -23,6 +32,10 @@ Future<RydeResponse> _fetchScooters(LatLngBounds bounds) async {
       )) /
       1000;
 
+  return await _fetchScooters(center, radius);
+}
+
+Future<RydeResponse> _fetchScooters(LatLng center, double radius) async {
   final response = await http.post(
     '$rydeBaseUrl/appRyde/getNearScooters',
     body: {
@@ -48,4 +61,4 @@ Stream<List<Scooter>> get scootersStream => Rx.combineLatest2(
       visibleRegion,
       Stream.periodic(Duration(minutes: 1)).startWith(null),
       (LatLngBounds bounds, _) => bounds,
-    ).asyncMap(_fetchScooters).map((response) => response.scooters);
+    ).asyncMap(_fetchScootersFromBounds).map((response) => response.scooters);
