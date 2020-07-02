@@ -12,7 +12,7 @@ class MarkerWidget extends StatelessWidget {
         elevation: 2,
         child: Padding(
           padding: const EdgeInsets.all(4),
-          child: Icon(MyIcons.electric_scooter, size: 14),
+          child: Icon(MyIcons.electric_scooter, size: 18),
         ),
       ),
     );
