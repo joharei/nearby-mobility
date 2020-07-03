@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48"
+   height="48"
+   viewBox="0 0 12.7 12.7"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   sodipodi:docname="app_icon_foreground.svg">
+  <defs
+     id="defs2">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter2498"
+       x="-0.038907786"
+       width="1.0778156"
+       y="-0.038907786"
+       height="1.0778156">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.035366321"
+         id="feGaussianBlur2500" />
+    </filter>
+    <filter
+       height="1.0778157"
+       y="-0.038907785"
+       width="1.0778157"
+       x="-0.038907785"
+       id="filter2498-5"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur2500-1"
+         stdDeviation="0.035366321"
+         inkscape:collect="always" />
+    </filter>
+    <filter
+       height="1.0778157"
+       y="-0.038907785"
+       width="1.0778157"
+       x="-0.038907785"
+       id="filter2498-7"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur2500-9"
+         stdDeviation="0.035366321"
+         inkscape:collect="always" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="17.279771"
+     inkscape:cx="30.695097"
+     inkscape:cy="25.169525"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g2583"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1912"
+     inkscape:window-height="1244"
+     inkscape:window-x="1827"
+     inkscape:window-y="67"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g2583"
+       transform="translate(0.30623476,-0.26029955)">
+      <circle
+         r="1.0907736"
+         style="opacity:0.4;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583;filter:url(#filter2498)"
+         id="path10-3"
+         cx="4.2517304"
+         cy="8.3307581" />
+      <circle
+         sodipodi:insensitive="true"
+         r="1.0907736"
+         cy="8.308445"
+         cx="4.2470541"
+         id="path10"
+         style="fill:#dcf2d7;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583" />
+      <g
+         sodipodi:insensitive="true"
+         transform="matrix(0.06054679,0,0,0.06054679,3.485681,7.5934881)"
+         id="g133">
+        <g
+           id="g106">
+          <rect
+             y="0"
+             x="0"
+             fill="none"
+             height="24"
+             width="24"
+             id="rect104" />
+        </g>
+        <g
+           id="g116">
+          <g
+             id="g114">
+            <path
+               d="M 7.82,16 H 15 v -1 c 0,-2.21 1.79,-4 4,-4 h 0.74 L 17.84,2.56 C 17.63,1.65 16.82,1 15.89,1 H 12 v 2 h 3.89 l 1.4,6.25 c 0,0 -0.01,0 -0.01,0 C 15.12,9.9 13.47,11.73 13.09,14 H 7.82 C 7.34,12.66 5.96,11.76 4.4,12.06 3.22,12.29 2.27,13.26 2.05,14.44 1.7,16.34 3.16,18 5,18 6.3,18 7.4,17.16 7.82,16 Z M 5,16 c -0.55,0 -1,-0.45 -1,-1 0,-0.55 0.45,-1 1,-1 0.55,0 1,0.45 1,1 0,0.55 -0.45,1 -1,1 z"
+               id="path108" />
+            <path
+               d="m 19,12 c -1.66,0 -3,1.34 -3,3 0,1.66 1.34,3 3,3 1.66,0 3,-1.34 3,-3 0,-1.66 -1.34,-3 -3,-3 z m 0,4 c -0.55,0 -1,-0.45 -1,-1 0,-0.55 0.45,-1 1,-1 0.55,0 1,0.45 1,1 0,0.55 -0.45,1 -1,1 z"
+               id="path110" />
+            <polygon
+               points="7,20 13,23 13,21 17,21 11,18 11,20 "
+               id="polygon112" />
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       id="g2583-2"
+       transform="translate(1.8714987,-4.4580578)">
+      <circle
+         r="1.0907736"
+         cy="8.3307581"
+         cx="4.2517304"
+         id="path10-3-4"
+         style="opacity:0.4;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583;filter:url(#filter2498-5)" />
+      <circle
+         style="fill:#dcf2d7;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583"
+         id="path10-6"
+         cx="4.2470541"
+         cy="8.308445"
+         r="1.0907736"
+         sodipodi:insensitive="true" />
+      <g
+         id="g133-7"
+         transform="matrix(0.06054679,0,0,0.06054679,3.485681,7.5934881)"
+         sodipodi:insensitive="true">
+        <g
+           id="g106-5">
+          <rect
+             id="rect104-5"
+             width="24"
+             height="24"
+             fill="none"
+             x="0"
+             y="0" />
+        </g>
+        <g
+           id="g116-0">
+          <g
+             id="g114-5">
+            <path
+               id="path108-2"
+               d="M 7.82,16 H 15 v -1 c 0,-2.21 1.79,-4 4,-4 h 0.74 L 17.84,2.56 C 17.63,1.65 16.82,1 15.89,1 H 12 v 2 h 3.89 l 1.4,6.25 c 0,0 -0.01,0 -0.01,0 C 15.12,9.9 13.47,11.73 13.09,14 H 7.82 C 7.34,12.66 5.96,11.76 4.4,12.06 3.22,12.29 2.27,13.26 2.05,14.44 1.7,16.34 3.16,18 5,18 6.3,18 7.4,17.16 7.82,16 Z M 5,16 c -0.55,0 -1,-0.45 -1,-1 0,-0.55 0.45,-1 1,-1 0.55,0 1,0.45 1,1 0,0.55 -0.45,1 -1,1 z" />
+            <path
+               id="path110-0"
+               d="m 19,12 c -1.66,0 -3,1.34 -3,3 0,1.66 1.34,3 3,3 1.66,0 3,-1.34 3,-3 0,-1.66 -1.34,-3 -3,-3 z m 0,4 c -0.55,0 -1,-0.45 -1,-1 0,-0.55 0.45,-1 1,-1 0.55,0 1,0.45 1,1 0,0.55 -0.45,1 -1,1 z" />
+            <polygon
+               id="polygon112-7"
+               points="17,21 11,18 11,20 7,20 13,23 13,21 " />
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       id="g2583-7"
+       transform="translate(4.1237903,-1.4404759)">
+      <circle
+         r="1.0907736"
+         cy="8.3307581"
+         cx="4.2517304"
+         id="path10-3-5"
+         style="opacity:0.4;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583;filter:url(#filter2498-7)" />
+      <circle
+         style="fill:#dcf2d7;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583"
+         id="path10-39"
+         cx="4.2470541"
+         cy="8.308445"
+         r="1.0907736"
+         sodipodi:insensitive="true" />
+      <g
+         id="g133-9"
+         transform="matrix(0.06054679,0,0,0.06054679,3.485681,7.5934881)"
+         sodipodi:insensitive="true">
+        <g
+           id="g106-4">
+          <rect
+             id="rect104-9"
+             width="24"
+             height="24"
+             fill="none"
+             x="0"
+             y="0" />
+        </g>
+        <g
+           id="g116-1">
+          <g
+             id="g114-59">
+            <path
+               id="path108-8"
+               d="M 7.82,16 H 15 v -1 c 0,-2.21 1.79,-4 4,-4 h 0.74 L 17.84,2.56 C 17.63,1.65 16.82,1 15.89,1 H 12 v 2 h 3.89 l 1.4,6.25 c 0,0 -0.01,0 -0.01,0 C 15.12,9.9 13.47,11.73 13.09,14 H 7.82 C 7.34,12.66 5.96,11.76 4.4,12.06 3.22,12.29 2.27,13.26 2.05,14.44 1.7,16.34 3.16,18 5,18 6.3,18 7.4,17.16 7.82,16 Z M 5,16 c -0.55,0 -1,-0.45 -1,-1 0,-0.55 0.45,-1 1,-1 0.55,0 1,0.45 1,1 0,0.55 -0.45,1 -1,1 z" />
+            <path
+               id="path110-3"
+               d="m 19,12 c -1.66,0 -3,1.34 -3,3 0,1.66 1.34,3 3,3 1.66,0 3,-1.34 3,-3 0,-1.66 -1.34,-3 -3,-3 z m 0,4 c -0.55,0 -1,-0.45 -1,-1 0,-0.55 0.45,-1 1,-1 0.55,0 1,0.45 1,1 0,0.55 -0.45,1 -1,1 z" />
+            <polygon
+               id="polygon112-0"
+               points="11,20 7,20 13,23 13,21 17,21 11,18 " />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
