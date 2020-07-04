@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nearby_mobility/ambient_page.dart';
 import 'package:nearby_mobility/map_page.dart';
 import 'package:wear/wear.dart';
@@ -17,11 +18,16 @@ class _MyAppState extends State<MyApp> {
       builder: (context, mode) {
         return MaterialApp(
           title: 'Nearby Mobility',
-          darkTheme: ThemeData(
-            brightness: Brightness.dark,
-            canvasColor: mode == Mode.ambient ? Colors.black : null,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: Colors.black,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          themeMode: mode == Mode.active ? ThemeMode.light : ThemeMode.dark,
           home: Scaffold(
             body: mode == Mode.ambient
                 ? AmbientPage()
