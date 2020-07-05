@@ -14,6 +14,10 @@ Future<List<Scooter>> get nearbyScooters async {
   final position = await Geolocator().getLastKnownPosition(
       locationPermissionLevel: GeolocationPermission.locationWhenInUse);
 
+  if (position == null) {
+    return null;
+  }
+
   return (await _fetchScooters(
           LatLng(position.latitude, position.longitude), 1))
       .scooters;

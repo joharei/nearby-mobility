@@ -12,6 +12,11 @@ class AmbientPage extends StatelessWidget {
       future: Repository.nearbyScooters,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          if (snapshot.data == null) {
+            return Center(
+              child: Text("Couldn't get position"),
+            );
+          }
           return Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,

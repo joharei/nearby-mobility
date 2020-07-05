@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:developer' as developer;
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nearby_mobility/marker_generator.dart';
@@ -12,19 +10,30 @@ import 'package:nearby_mobility/models/scooter.dart';
 import 'package:nearby_mobility/repository.dart' as Repository;
 
 class MapPage extends StatefulWidget {
+  final CameraPosition initialCameraPosition;
+
+  MapPage({Key key, @required Position initialPosition})
+      : initialCameraPosition = initialPosition == null
+            ? null
+            : CameraPosition(
+                target:
+                    LatLng(initialPosition.latitude, initialPosition.longitude),
+                zoom: 15,
+              ),
+        super(key: key);
+
   @override
   _MapPageState createState() => _MapPageState();
 }
 
 // Centered on the Stavanger/Sandnes area
-const initialPosition = CameraPosition(
+const defaultPosition = CameraPosition(
   target: LatLng(58.9109397, 5.7244898),
   zoom: 11.5,
 );
 
 class _MapPageState extends State<MapPage> {
   final _controller = Completer<GoogleMapController>();
-  bool myLocationEnabled = false;
   Uint8List scooterMarkerIcon;
 
   @override
@@ -37,7 +46,6 @@ class _MapPageState extends State<MapPage> {
         });
       }
     }).generate(context);
-    _initCurrentLocation();
   }
 
   @override
@@ -48,8 +56,9 @@ class _MapPageState extends State<MapPage> {
             .toSet()),
         builder: (context, snapshot) {
           return GoogleMap(
-            initialCameraPosition: initialPosition,
-            myLocationEnabled: myLocationEnabled,
+            initialCameraPosition:
+                widget.initialCameraPosition ?? defaultPosition,
+            myLocationEnabled: widget.initialCameraPosition != null,
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
@@ -62,30 +71,6 @@ class _MapPageState extends State<MapPage> {
             },
           );
         });
-  }
-
-  _initCurrentLocation() async {
-    try {
-      final geolocator = Geolocator();
-      final position = await geolocator.getCurrentPosition();
-      final controller = await _controller.future;
-      if (mounted) {
-        controller.animateCamera(CameraUpdate.newLatLngZoom(
-          LatLng(position.latitude, position.longitude),
-          15,
-        ));
-
-        var geolocationStatus =
-            await geolocator.checkGeolocationPermissionStatus();
-        if (mounted) {
-          setState(() {
-            myLocationEnabled = geolocationStatus == GeolocationStatus.granted;
-          });
-        }
-      }
-    } on PlatformException catch (error) {
-      developer.log("Couldn't get location", error: error);
-    }
   }
 
   Marker _bitmapToMarker(Uint8List bitmap, Scooter scooter) {
