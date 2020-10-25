@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nearby_mobility/inherited_ambient_mode.dart';
-import 'package:nearby_mobility/main_page.dart';
+import 'package:nearby_mobility/pages/main_page.dart';
 import 'package:wear/wear.dart';
 
 void main() => runApp(MyApp());

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:nearby_mobility/ambient_page.dart';
 import 'package:nearby_mobility/inherited_ambient_mode.dart';
-import 'package:nearby_mobility/map_page.dart';
+import 'package:nearby_mobility/pages/ambient_page.dart';
+import 'package:nearby_mobility/pages/map_page.dart';
 import 'package:wear/wear.dart';
 
 class MainPage extends StatefulWidget {

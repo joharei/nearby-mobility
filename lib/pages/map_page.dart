@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:fluster/fluster.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nearby_mobility/marker_generator.dart';
-import 'package:nearby_mobility/marker_widget.dart';
+import 'package:nearby_mobility/marker_tools/clustering.dart' as Clustering;
+import 'package:nearby_mobility/marker_tools/map_marker.dart';
+import 'package:nearby_mobility/marker_tools/marker_generator.dart';
+import 'package:nearby_mobility/marker_tools/marker_widget.dart';
 import 'package:nearby_mobility/models/scooter.dart';
 import 'package:nearby_mobility/repository.dart' as Repository;
 
@@ -35,6 +38,8 @@ const defaultPosition = CameraPosition(
 class _MapPageState extends State<MapPage> {
   final _controller = Completer<GoogleMapController>();
   Uint8List scooterMarkerIcon;
+  Fluster<MapMarker> _clusterManager;
+  double _currentZoom = 15;
 
   @override
   void initState() {
@@ -80,5 +85,23 @@ class _MapPageState extends State<MapPage> {
             LatLng(scooter.coordinate.latitude, scooter.coordinate.longitude),
         icon: BitmapDescriptor.fromBytes(bitmap),
         anchor: Offset(0.5, 0.5));
+  }
+
+  /// Gets the markers and clusters to be displayed on the map for the current zoom level and
+  /// updates state.
+  Future<void> _updateMarkers([double updatedZoom]) async {
+    if (_clusterManager == null || updatedZoom == _currentZoom) return;
+
+    if (updatedZoom != null) {
+      _currentZoom = updatedZoom;
+    }
+
+    final updatedMarkers = await Clustering.getClusterMarkers(
+      context,
+      _clusterManager,
+      _currentZoom,
+    );
+
+    setState(() {});
   }
 }

@@ -1,8 +1,28 @@
+import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+Future<BitmapDescriptor> generateIcon(
+    BuildContext context, Widget widget) async {
+  return (await generateIcons(context, [widget]))[0];
+}
+
+Future<List<BitmapDescriptor>> generateIcons(
+    BuildContext context, List<Widget> widgets) async {
+  final iconsCompleter = Completer<List<BitmapDescriptor>>();
+
+  MarkerGenerator(widgets, (bitmaps) {
+    final icons =
+        bitmaps.map((bitmap) => BitmapDescriptor.fromBytes(bitmap)).toList();
+    iconsCompleter.complete(icons);
+  }).generate(context);
+
+  return iconsCompleter.future;
+}
 
 /// This just adds overlay and builds [_MarkerHelper] on that overlay.
 /// [_MarkerHelper] does all the heavy work of creating and getting bitmaps
