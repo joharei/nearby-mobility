@@ -1,89 +1,67 @@
 package app.reitan.nearby_mobility
 
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapFragment
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-
-import android.app.Activity
+import android.Manifest
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.*
+import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.SwipeDismissFrameLayout
 import app.reitan.nearby_mobility.databinding.ActivityMapsBinding
+import app.reitan.nearby_mobility.ui.ProvideDisplayInsets
+import app.reitan.nearby_mobility.ui.WearMode
+import app.reitan.nearby_mobility.ui.WearModeAmbient
+import app.reitan.nearby_mobility.ui.permissionState
 
-class MapsActivity : Activity(), OnMapReadyCallback {
 
-    /**
-     * Map is initialized when it"s fully loaded and ready to be used.
-     * See [onMapReady]
-     */
-    private lateinit var mMap: GoogleMap
-    private lateinit var swipeDismissRootContainer: SwipeDismissFrameLayout
-    private lateinit var binding: ActivityMapsBinding
+class MapsActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
+
+    private var ambientMode: WearMode by mutableStateOf(WearMode.Active)
 
     public override fun onCreate(savedState: Bundle?) {
         super.onCreate(savedState)
 
-        binding = ActivityMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        ActivityMapsBinding.inflate(layoutInflater).apply {
+            setContentView(root)
 
-        // Enables the Swipe-To-Dismiss Gesture via the root layout (SwipeDismissFrameLayout).
-        // Swipe-To-Dismiss is a standard pattern in Wear for closing an app and needs to be
-        // manually enabled for any Google Maps Activity. For more information, review our docs:
-        // https://developer.android.com/training/wearables/ui/exit.html
-        swipeDismissRootContainer = binding.swipeDismissRootContainer
-        swipeDismissRootContainer.addCallback(object : SwipeDismissFrameLayout.Callback() {
-            override fun onDismissed(layout: SwipeDismissFrameLayout?) {
-                // Hides view before exit to avoid stutter.
-                layout?.visibility = View.GONE
-                finish()
+            swipeDismissRootContainer.addCallback(object :
+                SwipeDismissFrameLayout.Callback() {
+                override fun onDismissed(layout: SwipeDismissFrameLayout?) {
+                    // Hides view before exit to avoid stutter.
+                    layout?.visibility = View.GONE
+                    finish()
+                }
+            })
+
+            composeView.setContent {
+                val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
+                onCommit {
+                    if (!locationPermission.hasPermission && !locationPermission.shouldShowRationale) {
+                        locationPermission.launchPermissionRequest()
+                    }
+                }
+
+                ProvideDisplayInsets {
+                    Providers(WearModeAmbient provides ambientMode) {
+                        App()
+                    }
+                }
             }
-        })
-
-        // Adjusts margins to account for the system window insets when they become available.
-        swipeDismissRootContainer.setOnApplyWindowInsetsListener { _, insetsArg ->
-            val insets = swipeDismissRootContainer.onApplyWindowInsets(insetsArg)
-            val mapContainer = binding.mapContainer
-            val params = mapContainer.layoutParams as FrameLayout.LayoutParams
-
-            // Add Wearable insets to FrameLayout container holding map as margins
-            params.setMargins(
-                insets.systemWindowInsetLeft,
-                insets.systemWindowInsetTop,
-                insets.systemWindowInsetRight,
-                insets.systemWindowInsetBottom
-            )
-            mapContainer.layoutParams = params
-
-            insets
         }
 
-        // Obtain the MapFragment and set the async listener to be notified when the map is ready.
-        @Suppress("Deprecation")
-        // Suppressing deprecation since WearableActivity doesn't extend FragmentManager, thus
-        // getSupportFragmentManager can't be used
-        val mapFragment = fragmentManager.findFragmentById(R.id.map) as MapFragment
-        mapFragment.getMapAsync(this)
+        AmbientModeSupport.attach(this).apply {
+            ambientMode = if (isAmbient) WearMode.Ambient(null) else WearMode.Active
+        }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        // Map is ready to be used.
-        mMap = googleMap
+    override fun getAmbientCallback(): AmbientModeSupport.AmbientCallback =
+        object : AmbientModeSupport.AmbientCallback() {
+            override fun onEnterAmbient(ambientDetails: Bundle?) {
+                ambientMode = WearMode.Ambient(ambientDetails)
+            }
 
-        // Inform user how to close app (Swipe-To-Close).
-        val duration = Toast.LENGTH_LONG
-        val toast = Toast.makeText(getApplicationContext(), R.string.intro_text, duration)
-        toast.setGravity(Gravity.CENTER, 0, 0)
-        toast.show()
-
-        // Adds a marker in Sydney, Australia and moves the camera.
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-    }
+            override fun onExitAmbient() {
+                ambientMode = WearMode.Active
+            }
+        }
 }
