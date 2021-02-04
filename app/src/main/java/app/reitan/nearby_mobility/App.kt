@@ -1,14 +1,11 @@
 package app.reitan.nearby_mobility
 
 import androidx.compose.runtime.Composable
-import androidx.ui.tooling.preview.Preview
-import app.reitan.nearby_mobility.ui.AppTheme
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun App() {
-    AppTheme {
-        GoogleMapView(ambientEnabled = true, zoomControlsEnabled = true)
-    }
+    GoogleMapView(ambientEnabled = true, zoomControlsEnabled = true)
 }
 
 @Preview

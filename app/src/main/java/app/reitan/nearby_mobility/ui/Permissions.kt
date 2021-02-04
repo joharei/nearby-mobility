@@ -11,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.*
-import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.AmbientContext
 
 @Composable
 fun <I, O> ActivityResultRegistry.activityResultLauncher(
@@ -22,14 +22,16 @@ fun <I, O> ActivityResultRegistry.activityResultLauncher(
     val launcher = remember(requestContract, onResult) {
         register(key, requestContract, onResult)
     }
-    onDispose {
-        launcher.unregister()
+    DisposableEffect(launcher) {
+        onDispose {
+            launcher.unregister()
+        }
     }
     return launcher
 }
 
 class PermissionState(
-    val permission: String,
+    private val permission: String,
     hasPermissionState: State<Boolean>,
     shouldShowRationaleState: State<Boolean>,
     private val launcher: ActivityResultLauncher<String>?
@@ -53,7 +55,7 @@ private fun Context.findActivity(): AppCompatActivity? {
 fun permissionState(
     permission: String
 ): PermissionState {
-    val context = ContextAmbient.current
+    val context = AmbientContext.current
     val activity = context.findActivity()
     val permissionState = mutableStateOf(
         context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED

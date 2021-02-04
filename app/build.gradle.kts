@@ -26,11 +26,13 @@ android {
         useIR = true
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
-            "-Xopt-in=androidx.compose.runtime.ExperimentalComposeApi"
+            "-Xopt-in=androidx.compose.runtime.ExperimentalComposeApi",
+            "-Xopt-in=dev.chrisbanes.accompanist.insets.ExperimentalAnimatedInsets"
         )
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
         val versionsProperties = rootProject.propertiesFromFile("versions.properties")
@@ -78,4 +80,5 @@ dependencies {
     implementation(AndroidX.compose.material)
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
+    implementation(Libs.accompanist.insets)
 }
