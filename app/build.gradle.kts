@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(Constants.CompileSdkVersion)
 
     defaultConfig {
         applicationId = "app.reitan.nearby_mobility"
         minSdkVersion(23)
-        targetSdkVersion(30)
+        targetSdkVersion(Constants.TargetSdkVersion)
         versionCode = 1
         versionName = "1.0"
 
@@ -27,7 +27,8 @@ android {
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
             "-Xopt-in=androidx.compose.runtime.ExperimentalComposeApi",
-            "-Xopt-in=dev.chrisbanes.accompanist.insets.ExperimentalAnimatedInsets"
+            "-Xopt-in=dev.chrisbanes.accompanist.insets.ExperimentalAnimatedInsets",
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
         )
     }
     buildFeatures {
@@ -59,8 +60,14 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
+
     implementation(kotlin("stdlib"))
     implementation(KotlinX.coroutines.playServices)
+    implementation(Libs.koin.core)
+    implementation(Libs.koin.android)
+    implementation(Libs.koin.androidX.viewModel)
+    implementation(Libs.koin.androidX.compose)
 
     implementation(Google.android.wearable)
     implementation(Google.android.supportWearable)

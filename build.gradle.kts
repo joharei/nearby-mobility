@@ -1,6 +1,6 @@
 plugins {
     id("com.android.application") apply false
-    id("org.jetbrains.kotlin.android") apply false
+    kotlin("android") apply false
 }
 
 allprojects {
@@ -12,6 +12,11 @@ allprojects {
 
 task<Delete>("clean") {
     delete(rootProject.buildDir)
+}
+buildscript {
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
+    }
 }
 
 tasks.getByName<Wrapper>("wrapper") {

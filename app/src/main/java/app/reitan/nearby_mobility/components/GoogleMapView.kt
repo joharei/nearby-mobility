@@ -22,6 +22,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
 
 
@@ -83,15 +85,27 @@ private fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserv
 @SuppressLint("MissingPermission")
 @Composable
 fun GoogleMapView(
-    position: LatLng? = null,
+    initialPosition: LatLng? = null,
     ambientEnabled: Boolean = false,
     zoomControlsEnabled: Boolean = false,
+    markers: List<MarkerOptions> = emptyList(),
+    onCameraIdle: (visibleBounds: LatLngBounds) -> Unit = {},
 ) {
     val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
     val mapView = rememberMapViewWithLifecycle(ambientEnabled, zoomControlsEnabled)
     val systemInsets = AmbientWindowInsets.current.systemBars
     AndroidView(
-        { mapView }
+        {
+            mapView.getMapAsync {
+                it.moveCamera(
+                    if (initialPosition != null)
+                        CameraUpdateFactory.newLatLngZoom(initialPosition, 14f)
+                    else
+                        CameraUpdateFactory.newLatLng(LatLng(58.9109397, 5.7244898))
+                )
+            }
+            mapView
+        }
     ) { map ->
         map.getMapAsync {
             it.setPadding(
@@ -101,13 +115,13 @@ fun GoogleMapView(
                 systemInsets.bottom
             )
             it.isMyLocationEnabled = locationPermission.hasPermission
+
+            it.setOnCameraIdleListener { onCameraIdle(it.projection.visibleRegion.latLngBounds) }
+
             it.clear()
-            it.moveCamera(
-                if (position != null)
-                    CameraUpdateFactory.newLatLngZoom(position, 14f)
-                else
-                    CameraUpdateFactory.newLatLng(LatLng(58.9109397, 5.7244898))
-            )
+            for (marker in markers) {
+                it.addMarker(marker)
+            }
         }
     }
 }

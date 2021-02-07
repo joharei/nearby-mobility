@@ -5,8 +5,11 @@ import android.annotation.SuppressLint
 import android.location.Location
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.AmbientContext
+import app.reitan.common.models.LatLon
+import app.reitan.common.models.LatLonBounds
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import kotlinx.coroutines.tasks.await
 
 @SuppressLint("MissingPermission")
@@ -32,3 +35,9 @@ sealed class LocationResult {
 }
 
 val Location.latLng: LatLng get() = LatLng(latitude, longitude)
+
+val LatLon.latLng: LatLng get() = LatLng(latitude, longitude)
+
+val LatLng.latLon: LatLon get() = LatLon(latitude, longitude)
+
+val LatLngBounds.latLonBounds: LatLonBounds get() = LatLonBounds(southwest.latLon, northeast.latLon)
