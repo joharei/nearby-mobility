@@ -60,6 +60,7 @@ android {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation(KotlinX.coroutines.playServices)
 
     implementation(Google.android.wearable)
     implementation(Google.android.supportWearable)

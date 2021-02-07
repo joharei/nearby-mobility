@@ -1,4 +1,4 @@
-package app.reitan.nearby_mobility
+package app.reitan.nearby_mobility.components
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -14,15 +14,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import app.reitan.nearby_mobility.tools.permissionState
 import app.reitan.nearby_mobility.ui.AmbientWearMode
 import app.reitan.nearby_mobility.ui.AppTheme
 import app.reitan.nearby_mobility.ui.WearMode
-import app.reitan.nearby_mobility.ui.permissionState
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
 
 
@@ -84,8 +83,7 @@ private fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserv
 @SuppressLint("MissingPermission")
 @Composable
 fun GoogleMapView(
-    latitude: Double = 58.9109397,
-    longitude: Double = 5.7244898,
+    position: LatLng? = null,
     ambientEnabled: Boolean = false,
     zoomControlsEnabled: Boolean = false,
 ) {
@@ -104,11 +102,12 @@ fun GoogleMapView(
             )
             it.isMyLocationEnabled = locationPermission.hasPermission
             it.clear()
-            val position = LatLng(latitude, longitude)
-            it.addMarker(
-                MarkerOptions().position(position)
+            it.moveCamera(
+                if (position != null)
+                    CameraUpdateFactory.newLatLngZoom(position, 14f)
+                else
+                    CameraUpdateFactory.newLatLng(LatLng(58.9109397, 5.7244898))
             )
-            it.moveCamera(CameraUpdateFactory.newLatLng(position))
         }
     }
 }

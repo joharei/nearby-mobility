@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package app.reitan.nearby_mobility.ui
+package app.reitan.nearby_mobility.tools
 
 import android.content.Context
 import android.content.ContextWrapper
