@@ -1,9 +1,9 @@
-package app.reitan.nearby_mobility
+package app.reitan.nearby_mobility.features.map
 
 import androidx.lifecycle.ViewModel
 import app.reitan.common.Repository
 
-class AppViewModel(repo: Repository) : ViewModel() {
+class ScooterMapViewModel(repo: Repository) : ViewModel() {
     val visibleRegion = repo.visibleRegion
 
     val scooters = repo.scooters

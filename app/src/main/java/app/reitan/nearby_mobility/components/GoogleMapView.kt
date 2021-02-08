@@ -34,6 +34,7 @@ import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
 private fun rememberMapViewWithLifecycle(
     ambientEnabled: Boolean,
     zoomControlsEnabled: Boolean,
+    initialPosition: LatLng? = null,
 ): MapView {
     val context = AmbientContext.current
     val mapView = remember(ambientEnabled, zoomControlsEnabled) {
@@ -42,7 +43,16 @@ private fun rememberMapViewWithLifecycle(
             GoogleMapOptions()
                 .ambientEnabled(ambientEnabled)
                 .zoomControlsEnabled(zoomControlsEnabled)
-        )
+        ).also { mapView ->
+            mapView.getMapAsync {
+                it.moveCamera(
+                    if (initialPosition != null)
+                        CameraUpdateFactory.newLatLngZoom(initialPosition, 14f)
+                    else
+                        CameraUpdateFactory.newLatLng(LatLng(58.9109397, 5.7244898))
+                )
+            }
+        }
     }
 
     // Makes MapView follow the lifecycle of this composable
@@ -84,29 +94,14 @@ private fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserv
 
 @SuppressLint("MissingPermission")
 @Composable
-fun GoogleMapView(
-    initialPosition: LatLng? = null,
-    ambientEnabled: Boolean = false,
-    zoomControlsEnabled: Boolean = false,
+private fun GoogleMapContainer(
+    mapView: MapView,
     markers: List<MarkerOptions> = emptyList(),
     onCameraIdle: (visibleBounds: LatLngBounds) -> Unit = {},
 ) {
     val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
-    val mapView = rememberMapViewWithLifecycle(ambientEnabled, zoomControlsEnabled)
     val systemInsets = AmbientWindowInsets.current.systemBars
-    AndroidView(
-        {
-            mapView.getMapAsync {
-                it.moveCamera(
-                    if (initialPosition != null)
-                        CameraUpdateFactory.newLatLngZoom(initialPosition, 14f)
-                    else
-                        CameraUpdateFactory.newLatLng(LatLng(58.9109397, 5.7244898))
-                )
-            }
-            mapView
-        }
-    ) { map ->
+    AndroidView({ mapView }) { map ->
         map.getMapAsync {
             it.setPadding(
                 systemInsets.left,
@@ -124,6 +119,18 @@ fun GoogleMapView(
             }
         }
     }
+}
+
+@Composable
+fun GoogleMapView(
+    initialPosition: LatLng? = null,
+    ambientEnabled: Boolean = false,
+    zoomControlsEnabled: Boolean = false,
+    markers: List<MarkerOptions> = emptyList(),
+    onCameraIdle: (visibleBounds: LatLngBounds) -> Unit = {},
+) {
+    val mapView = rememberMapViewWithLifecycle(ambientEnabled, zoomControlsEnabled, initialPosition)
+    GoogleMapContainer(mapView, markers, onCameraIdle)
 }
 
 @Preview

@@ -69,7 +69,7 @@ dependencies {
     implementation(Libs.koin.androidX.viewModel)
     implementation(Libs.koin.androidX.compose)
 
-    implementation(Google.android.wearable)
+    compileOnly(Google.android.wearable)
     implementation(Google.android.supportWearable)
 
     implementation(Google.android.playServices.wearOS)
