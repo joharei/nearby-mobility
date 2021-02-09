@@ -63,6 +63,7 @@ dependencies {
     implementation(project(":common"))
 
     implementation(kotlin("stdlib"))
+    implementation(KotlinX.coroutines)
     implementation(KotlinX.coroutines.playServices)
     implementation(Libs.koin.core)
     implementation(Libs.koin.android)
@@ -73,8 +74,11 @@ dependencies {
     implementation(Google.android.supportWearable)
 
     implementation(Google.android.playServices.wearOS)
-    implementation(Google.android.playServices.maps)
     implementation(Google.android.playServices.location)
+    implementation(Google.android.playServices.maps)
+    implementation(Google.android.maps.mapsKtx)
+    implementation(Google.android.maps.mapsUtils)
+    implementation(Google.android.maps.mapsUtilsKtx)
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.wear)

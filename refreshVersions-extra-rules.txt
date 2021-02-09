@@ -1,2 +1,8 @@
 org.koin:koin(-*)
     ^^^^
+
+com.google.maps.android:maps-utils-ktx
+    ^^^^^^^^^^^^                   ^^^
+
+com.google.maps.android:maps-ktx
+    ^^^^^^^^^^^^             ^^^

@@ -3,10 +3,7 @@ package app.reitan.nearby_mobility.components
 import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.platform.AmbientLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,12 +16,17 @@ import app.reitan.nearby_mobility.ui.AmbientWearMode
 import app.reitan.nearby_mobility.ui.AppTheme
 import app.reitan.nearby_mobility.ui.WearMode
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMapOptions
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.clustering.ClusterItem
+import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.ktx.awaitMap
+import com.google.maps.android.ktx.buildGoogleMapOptions
 import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
+import kotlinx.coroutines.launch
 
 
 /**
@@ -35,22 +37,32 @@ private fun rememberMapViewWithLifecycle(
     ambientEnabled: Boolean,
     zoomControlsEnabled: Boolean,
     initialPosition: LatLng? = null,
+    onCameraIdle: ((visibleBounds: LatLngBounds) -> Unit)? = null,
+    setUpClusterManager: ((GoogleMap) -> ClusterManager<out ClusterItem>)? = null,
 ): MapView {
     val context = AmbientContext.current
+    val scope = rememberCoroutineScope()
     val mapView = remember(ambientEnabled, zoomControlsEnabled) {
         MapView(
             context,
-            GoogleMapOptions()
-                .ambientEnabled(ambientEnabled)
-                .zoomControlsEnabled(zoomControlsEnabled)
+            buildGoogleMapOptions {
+                ambientEnabled(ambientEnabled)
+                zoomControlsEnabled(zoomControlsEnabled)
+            }
         ).also { mapView ->
-            mapView.getMapAsync {
-                it.moveCamera(
+            scope.launch {
+                val map = mapView.awaitMap()
+                map.moveCamera(
                     if (initialPosition != null)
                         CameraUpdateFactory.newLatLngZoom(initialPosition, 14f)
                     else
                         CameraUpdateFactory.newLatLng(LatLng(58.9109397, 5.7244898))
                 )
+                val clusterManager = setUpClusterManager?.invoke(map)
+                map.setOnCameraIdleListener {
+                    onCameraIdle?.invoke(map.projection.visibleRegion.latLngBounds)
+                    clusterManager?.onCameraIdle()
+                }
             }
         }
     }
@@ -97,25 +109,24 @@ private fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserv
 private fun GoogleMapContainer(
     mapView: MapView,
     markers: List<MarkerOptions> = emptyList(),
-    onCameraIdle: (visibleBounds: LatLngBounds) -> Unit = {},
 ) {
     val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
     val systemInsets = AmbientWindowInsets.current.systemBars
+    val scope = rememberCoroutineScope()
     AndroidView({ mapView }) { map ->
-        map.getMapAsync {
-            it.setPadding(
+        scope.launch {
+            val googleMap = map.awaitMap()
+            googleMap.setPadding(
                 systemInsets.left,
                 (systemInsets.top + 24.dp.value).toInt(),
                 systemInsets.right,
                 systemInsets.bottom
             )
-            it.isMyLocationEnabled = locationPermission.hasPermission
+            googleMap.isMyLocationEnabled = locationPermission.hasPermission
 
-            it.setOnCameraIdleListener { onCameraIdle(it.projection.visibleRegion.latLngBounds) }
-
-            it.clear()
+            googleMap.clear()
             for (marker in markers) {
-                it.addMarker(marker)
+                googleMap.addMarker(marker)
             }
         }
     }
@@ -128,9 +139,16 @@ fun GoogleMapView(
     zoomControlsEnabled: Boolean = false,
     markers: List<MarkerOptions> = emptyList(),
     onCameraIdle: (visibleBounds: LatLngBounds) -> Unit = {},
+    setUpClusterManager: ((GoogleMap) -> ClusterManager<out ClusterItem>)? = null,
 ) {
-    val mapView = rememberMapViewWithLifecycle(ambientEnabled, zoomControlsEnabled, initialPosition)
-    GoogleMapContainer(mapView, markers, onCameraIdle)
+    val mapView = rememberMapViewWithLifecycle(
+        ambientEnabled,
+        zoomControlsEnabled,
+        initialPosition,
+        onCameraIdle,
+        setUpClusterManager,
+    )
+    GoogleMapContainer(mapView, markers)
 }
 
 @Preview
