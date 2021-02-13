@@ -10,10 +10,13 @@ android {
         applicationId = "app.reitan.nearby_mobility"
         minSdkVersion(23)
         targetSdkVersion(Constants.TargetSdkVersion)
-        versionCode = 1
+        versionCode = System.getenv("BUILD_NUMBER")?.toIntOrNull() ?: 1
         versionName = "1.0"
 
         resConfigs("en", "nb", "nn")
+        System.getenv("GOOGLE_MAPS_KEY")?.let {
+            resValue("string", "google_maps_key", it)
+        }
     }
 
     compileOptions {
@@ -41,6 +44,17 @@ android {
             versionsProperties.getProperty("version.androidx.compose.foundation")
     }
 
+    signingConfigs {
+        create("release") {
+            if (System.getenv("CI") == "true") {
+                storeFile = file(System.getenv("FCI_KEYSTORE_PATH"))
+                storePassword = System.getenv("FCI_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("FCI_KEY_ALIAS")
+                keyPassword = System.getenv("FCI_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -49,6 +63,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
 
         debug {
@@ -63,7 +78,7 @@ dependencies {
     implementation(project(":common"))
 
     implementation(kotlin("stdlib"))
-    implementation(KotlinX.coroutines)
+    implementation(KotlinX.coroutines.android)
     implementation(KotlinX.coroutines.playServices)
     implementation(Libs.koin.core)
     implementation(Libs.koin.android)
