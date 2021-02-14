@@ -20,7 +20,7 @@ workflows:
         - tag
         - pull_request
       branch_patterns:
-        - pattern: master
+        - pattern: '*master*'
           include: true
       cancel_previous_builds: true
     scripts:
