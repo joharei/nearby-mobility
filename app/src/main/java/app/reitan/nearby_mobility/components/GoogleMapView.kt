@@ -4,16 +4,16 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.compose.runtime.*
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.AmbientLifecycleOwner
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import app.reitan.nearby_mobility.tools.permissionState
-import app.reitan.nearby_mobility.ui.AmbientWearMode
 import app.reitan.nearby_mobility.ui.AppTheme
+import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.WearMode
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -25,7 +25,7 @@ import com.google.maps.android.clustering.ClusterItem
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.ktx.awaitMap
 import com.google.maps.android.ktx.buildGoogleMapOptions
-import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
+import dev.chrisbanes.accompanist.insets.LocalWindowInsets
 import kotlinx.coroutines.launch
 
 
@@ -40,7 +40,7 @@ private fun rememberMapViewWithLifecycle(
     onCameraIdle: ((visibleBounds: LatLngBounds) -> Unit)? = null,
     setUpClusterManager: ((GoogleMap) -> ClusterManager<out ClusterItem>)? = null,
 ): MapView {
-    val context = AmbientContext.current
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val mapView = remember(ambientEnabled, zoomControlsEnabled) {
         MapView(
@@ -69,7 +69,7 @@ private fun rememberMapViewWithLifecycle(
 
     // Makes MapView follow the lifecycle of this composable
     val lifecycleObserver = rememberMapLifecycleObserver(mapView)
-    val lifecycle = AmbientLifecycleOwner.current.lifecycle
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
     DisposableEffect(lifecycle) {
         lifecycle.addObserver(lifecycleObserver)
         onDispose {
@@ -77,7 +77,7 @@ private fun rememberMapViewWithLifecycle(
         }
     }
 
-    val wearMode = AmbientWearMode.current
+    val wearMode = LocalWearMode.current
     SideEffect {
         when (wearMode) {
             WearMode.Active -> mapView.onExitAmbient()
@@ -111,7 +111,7 @@ private fun GoogleMapContainer(
     markers: List<MarkerOptions> = emptyList(),
 ) {
     val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
-    val systemInsets = AmbientWindowInsets.current.systemBars
+    val systemInsets = LocalWindowInsets.current.systemBars
     val scope = rememberCoroutineScope()
     AndroidView({ mapView }) { map ->
         scope.launch {

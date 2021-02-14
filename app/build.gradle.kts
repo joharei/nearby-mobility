@@ -98,6 +98,8 @@ dependencies {
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.wear)
+    implementation(AndroidX.activityKtx)
+    implementation(AndroidX.lifecycle.viewModelCompose)
 
     // Compose
     implementation(AndroidX.compose.runtime)

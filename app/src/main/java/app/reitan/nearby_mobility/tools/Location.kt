@@ -4,7 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Location
 import androidx.compose.runtime.*
-import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.ui.platform.LocalContext
 import app.reitan.common.models.LatLon
 import app.reitan.common.models.LatLonBounds
 import com.google.android.gms.location.LocationServices
@@ -18,7 +18,7 @@ import kotlin.time.seconds
 @Composable
 fun lastLocation(): LocationResult {
     val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
-    val current = AmbientContext.current
+    val current = LocalContext.current
     val fusedLocationClient = remember {
         LocationServices.getFusedLocationProviderClient(current)
     }

@@ -1,9 +1,9 @@
 package app.reitan.nearby_mobility.ui
 
 import android.os.Bundle
-import androidx.compose.runtime.ambientOf
+import androidx.compose.runtime.compositionLocalOf
 
-val AmbientWearMode = ambientOf<WearMode> { WearMode.Active }
+val LocalWearMode = compositionLocalOf<WearMode> { WearMode.Active }
 
 sealed class WearMode {
     object Active : WearMode()

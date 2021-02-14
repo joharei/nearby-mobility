@@ -32,6 +32,9 @@ object Maps {
 val AndroidX.Compose.Ui.uiTooling: String
     get() = "androidx.compose.ui:ui-tooling:_"
 
+val AndroidX.Lifecycle.viewModelCompose: String
+    get() = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha01"
+
 val Google.Android.PlayServices.maps: String
     get() = "com.google.android.gms:play-services-maps:_"
 

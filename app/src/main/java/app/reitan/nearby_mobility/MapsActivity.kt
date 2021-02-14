@@ -9,7 +9,7 @@ import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.SwipeDismissFrameLayout
 import app.reitan.nearby_mobility.databinding.ActivityMapsBinding
 import app.reitan.nearby_mobility.tools.permissionState
-import app.reitan.nearby_mobility.ui.AmbientWearMode
+import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.AppTheme
 import app.reitan.nearby_mobility.ui.WearMode
 
@@ -41,7 +41,7 @@ class MapsActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
                     }
                 }
 
-                Providers(AmbientWearMode provides ambientMode) {
+                Providers(LocalWearMode provides ambientMode) {
                     AppTheme {
                         App()
                     }

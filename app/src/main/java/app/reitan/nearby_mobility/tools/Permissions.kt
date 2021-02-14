@@ -11,14 +11,14 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.*
-import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun <I, O> ActivityResultRegistry.activityResultLauncher(
     requestContract: ActivityResultContract<I, O>,
-    onResult: (O) -> Unit
+    onResult: (O) -> Unit,
 ): ActivityResultLauncher<I> {
-    val key = currentComposer.currentCompoundKeyHash.toString()
+    val key = currentCompositeKeyHash().toString()
     val launcher = remember(requestContract, onResult) {
         register(key, requestContract, onResult)
     }
@@ -34,7 +34,7 @@ class PermissionState(
     private val permission: String,
     hasPermissionState: State<Boolean>,
     shouldShowRationaleState: State<Boolean>,
-    private val launcher: ActivityResultLauncher<String>?
+    private val launcher: ActivityResultLauncher<String>?,
 ) {
     val hasPermission by hasPermissionState
     val shouldShowRationale by shouldShowRationaleState
@@ -53,9 +53,9 @@ private fun Context.findActivity(): AppCompatActivity? {
 
 @Composable
 fun permissionState(
-    permission: String
+    permission: String,
 ): PermissionState {
-    val context = AmbientContext.current
+    val context = LocalContext.current
     val activity = context.findActivity()
     val permissionState = mutableStateOf(
         context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
