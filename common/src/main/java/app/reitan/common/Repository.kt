@@ -9,6 +9,7 @@ import app.reitan.common.ryde.RydeApi
 import app.reitan.common.tools.distance
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.transformLatest
 import kotlin.math.roundToInt
@@ -31,7 +32,7 @@ class Repository internal constructor(
                     delay(1.minutes)
                 } while (true)
             }
-        }
+        }.distinctUntilChanged()
 
     private suspend fun fetchRydeScooters(visibleRegion: LatLonBounds): List<Scooter> {
         val centerLat = (visibleRegion.southWest.latitude + visibleRegion.northEast.latitude) / 2

@@ -31,7 +31,8 @@ android {
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
             "-Xopt-in=androidx.compose.runtime.ExperimentalComposeApi",
             "-Xopt-in=dev.chrisbanes.accompanist.insets.ExperimentalAnimatedInsets",
-            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xopt-in=kotlin.time.ExperimentalTime"
         )
     }
     buildFeatures {
