@@ -8,8 +8,8 @@ import androidx.compose.ui.platform.LocalContext
 import app.reitan.common.models.LatLon
 import app.reitan.common.models.LatLonBounds
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.libraries.maps.model.LatLng
+import com.google.android.libraries.maps.model.LatLngBounds
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.seconds

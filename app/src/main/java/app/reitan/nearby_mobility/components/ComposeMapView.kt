@@ -8,8 +8,8 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
+import com.google.android.libraries.maps.GoogleMap
+import com.google.android.libraries.maps.MapView
 import com.google.maps.android.ktx.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -27,6 +27,7 @@ fun ComposeMapView(
         buildGoogleMapOptions {
             ambientEnabled(true)
             zoomControlsEnabled(true)
+            mapId("e613df2596ebc05")
         }
     }
 

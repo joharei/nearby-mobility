@@ -5,8 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.libraries.maps.model.BitmapDescriptor
+import com.google.android.libraries.maps.model.BitmapDescriptorFactory
 
 fun bitmapDescriptorFromVector(context: Context, @DrawableRes vectorResId: Int): BitmapDescriptor {
     return ContextCompat.getDrawable(context, vectorResId).run {

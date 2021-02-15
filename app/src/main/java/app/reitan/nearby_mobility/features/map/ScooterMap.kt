@@ -16,9 +16,9 @@ import app.reitan.nearby_mobility.tools.latLonBounds
 import app.reitan.nearby_mobility.tools.permissionState
 import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.WearMode
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.maps.CameraUpdateFactory
+import com.google.android.libraries.maps.MapView
+import com.google.android.libraries.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 import dev.chrisbanes.accompanist.insets.LocalWindowInsets
 import kotlinx.coroutines.flow.flowOf

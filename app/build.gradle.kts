@@ -86,15 +86,11 @@ dependencies {
     implementation(Libs.koin.androidX.viewModel)
     implementation(Libs.koin.androidX.compose)
 
-    compileOnly(Google.android.wearable)
-    implementation(Google.android.supportWearable)
-
     implementation(Google.android.playServices.wearOS)
     implementation(Google.android.playServices.location)
-    implementation(Google.android.playServices.maps)
+    implementation(Google.android.maps.mapsV3)
     implementation(Google.android.maps.mapsKtx)
     implementation(Google.android.maps.mapsUtils)
-    implementation(Google.android.maps.mapsUtilsKtx)
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.wear)

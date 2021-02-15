@@ -24,9 +24,9 @@ object Libs {
 }
 
 object Maps {
-    const val mapsKtx = "com.google.maps.android:maps-ktx:_"
-    const val mapsUtils = "com.google.maps.android:android-maps-utils:_"
-    const val mapsUtilsKtx = "com.google.maps.android:maps-utils-ktx:_"
+    const val mapsV3 = "com.google.android.libraries.maps:maps:_"
+    const val mapsKtx = "com.google.maps.android:maps-v3-ktx:_"
+    const val mapsUtils = "com.google.maps.android:android-maps-utils-v3:_"
 }
 
 val AndroidX.Compose.Ui.uiTooling: String
