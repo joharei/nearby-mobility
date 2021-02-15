@@ -32,7 +32,6 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Locati
             is WearMode.Ambient -> flowOf(emptyList())
         }
     }.collectAsState(initial = emptyList())
-    val context = LocalContext.current
     var clusterManager by remember { mutableStateOf<ClusterManager<ScooterClusterItem>?>(null) }
 
     clusterManager?.apply {
@@ -57,7 +56,7 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Locati
                 if (location != null)
                     CameraUpdateFactory.newLatLngZoom(location.latLng, 14f)
                 else
-                    CameraUpdateFactory.newLatLng(LatLng(58.9109397, 5.7244898))
+                    CameraUpdateFactory.newLatLngZoom(LatLng(58.9109397, 5.7244898), 16f)
             )
         },
         cameraIdleListener = {
@@ -68,6 +67,7 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Locati
     val googleMap = googleMapState.value
 
     if (googleMap != null && clusterManager == null) {
+        val context = LocalContext.current
         clusterManager = ClusterManager<ScooterClusterItem>(context, googleMap).apply {
             renderer = ScooterRenderer(context, googleMap, this)
         }

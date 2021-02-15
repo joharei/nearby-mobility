@@ -7,7 +7,10 @@ import app.reitan.common.models.Operator
 import app.reitan.common.models.Scooter
 import app.reitan.common.ryde.RydeApi
 import app.reitan.common.tools.distance
-import kotlinx.coroutines.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
@@ -37,7 +40,8 @@ class Repository internal constructor(
     private suspend fun fetchRydeScooters(visibleRegion: LatLonBounds): List<Scooter> {
         val centerLat = (visibleRegion.southWest.latitude + visibleRegion.northEast.latitude) / 2
         val centerLon = (visibleRegion.southWest.longitude + visibleRegion.northEast.longitude) / 2
-        val radiusKm = distance(LatLon(centerLat, centerLon), visibleRegion.southWest) / 1000
+        val radiusKm = distance(LatLon(centerLat, centerLon), visibleRegion.southWest)
+            .coerceAtMost(1000.0) / 1000
         return rydeApi.fetchScooters(centerLat, centerLon, radiusKm).scooters.map {
             Scooter(Operator.Ryde, LatLon(it.coordinate.latitude, it.coordinate.longitude))
         }
@@ -46,7 +50,10 @@ class Repository internal constructor(
     private suspend fun fetchEnturScooters(visibleRegion: LatLonBounds): List<Scooter> {
         val centerLat = (visibleRegion.southWest.latitude + visibleRegion.northEast.latitude) / 2
         val centerLon = (visibleRegion.southWest.longitude + visibleRegion.northEast.longitude) / 2
-        val radiusM = distance(LatLon(centerLat, centerLon), visibleRegion.southWest).roundToInt()
+        val radiusM =
+            distance(LatLon(centerLat, centerLon), visibleRegion.southWest)
+                .coerceAtMost(1000.0)
+                .roundToInt()
         return enturApi.fetchScooters(centerLat, centerLon, radiusM).map {
             Scooter(
                 when (it.operator) {
