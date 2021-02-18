@@ -64,7 +64,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig =
+                if (System.getenv("CI") == "true") signingConfigs.getByName("release")
+                else getByName("debug").signingConfig
         }
 
         debug {
