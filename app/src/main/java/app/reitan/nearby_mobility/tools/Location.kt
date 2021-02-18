@@ -25,7 +25,9 @@ fun lastLocation(): LocationResult {
     var result by remember { mutableStateOf<LocationResult>(LocationResult.Loading) }
     LaunchedEffect(locationPermission) {
         result = LocationResult.Success(
-            withTimeoutOrNull(1.seconds) { fusedLocationClient.lastLocation.await() }
+            if (locationPermission.hasPermission) {
+                withTimeoutOrNull(1.seconds) { fusedLocationClient.lastLocation.await() }
+            } else null
         )
     }
     return result

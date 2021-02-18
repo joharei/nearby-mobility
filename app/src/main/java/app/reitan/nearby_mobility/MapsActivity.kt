@@ -9,8 +9,8 @@ import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.SwipeDismissFrameLayout
 import app.reitan.nearby_mobility.databinding.ActivityMapsBinding
 import app.reitan.nearby_mobility.tools.permissionState
-import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.AppTheme
+import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.WearMode
 
 
@@ -36,7 +36,8 @@ class MapsActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
             composeView.setContent {
                 val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
                 SideEffect {
-                    if (!locationPermission.hasPermission && !locationPermission.shouldShowRationale) {
+                    // TODO: handle locationPermission.shouldShowRationale
+                    if (!locationPermission.hasPermission) {
                         locationPermission.launchPermissionRequest()
                     }
                 }
