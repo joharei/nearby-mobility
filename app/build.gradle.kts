@@ -88,7 +88,6 @@ dependencies {
     implementation(Libs.koin.androidX.viewModel)
     implementation(Libs.koin.androidX.compose)
 
-    implementation(Google.android.playServices.wearOS)
     implementation(Google.android.playServices.location)
     implementation(Google.android.maps.mapsV3)
     implementation(Google.android.maps.mapsKtx)
