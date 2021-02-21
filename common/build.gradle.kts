@@ -10,6 +10,7 @@ android {
     defaultConfig {
         minSdkVersion(21)
         targetSdkVersion(Constants.TargetSdkVersion)
+        consumerProguardFile("proguard-rules.pro")
     }
 
     compileOptions {

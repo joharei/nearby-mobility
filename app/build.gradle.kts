@@ -96,6 +96,7 @@ dependencies {
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.wear)
     implementation(AndroidX.activityKtx)
+    implementation(AndroidX.fragmentKtx)
     implementation(AndroidX.lifecycle.viewModelCompose)
 
     // Compose
