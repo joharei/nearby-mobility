@@ -7,21 +7,21 @@ import androidx.compose.runtime.*
 import androidx.fragment.app.FragmentActivity
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.SwipeDismissFrameLayout
-import app.reitan.nearby_mobility.databinding.ActivityMapsBinding
+import app.reitan.nearby_mobility.databinding.ActivityMainBinding
 import app.reitan.nearby_mobility.tools.permissionState
 import app.reitan.nearby_mobility.ui.AppTheme
 import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.WearMode
 
 
-class MapsActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvider {
+class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvider {
 
     private var ambientMode: WearMode by mutableStateOf(WearMode.Active)
 
     public override fun onCreate(savedState: Bundle?) {
         super.onCreate(savedState)
 
-        ActivityMapsBinding.inflate(layoutInflater).apply {
+        ActivityMainBinding.inflate(layoutInflater).apply {
             setContentView(root)
 
             swipeDismissRootContainer.addCallback(object :
