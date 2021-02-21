@@ -93,6 +93,9 @@ dependencies {
     implementation(Google.android.maps.mapsKtx)
     implementation(Google.android.maps.mapsUtils)
 
+    // Needed for Ambient mode to work with R8
+    compileOnly(Google.android.wearable)
+
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.wear)
     implementation(AndroidX.activityKtx)
