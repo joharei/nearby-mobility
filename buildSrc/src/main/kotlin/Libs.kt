@@ -29,11 +29,14 @@ object Maps {
     const val mapsUtils = "com.google.maps.android:android-maps-utils-v3:_"
 }
 
+val AndroidX.activityCompose: String
+    get() = "androidx.activity:activity-compose:_"
+
 val AndroidX.Compose.Ui.uiTooling: String
     get() = "androidx.compose.ui:ui-tooling:_"
 
 val AndroidX.Lifecycle.viewModelCompose: String
-    get() = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha01"
+    get() = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha02"
 
 val Google.Android.PlayServices.maps: String
     get() = "com.google.android.gms:play-services-maps:_"

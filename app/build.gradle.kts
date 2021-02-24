@@ -28,8 +28,8 @@ android {
         jvmTarget = "11"
         useIR = true
         freeCompilerArgs = freeCompilerArgs + listOf(
-            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
-            "-Xopt-in=androidx.compose.runtime.ExperimentalComposeApi",
+//            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+//            "-Xopt-in=androidx.compose.runtime.ExperimentalComposeApi",
             "-Xopt-in=dev.chrisbanes.accompanist.insets.ExperimentalAnimatedInsets",
             "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
             "-Xopt-in=kotlin.time.ExperimentalTime"
@@ -111,5 +111,6 @@ dependencies {
     implementation(AndroidX.compose.material)
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
+    implementation(AndroidX.activityCompose)
     implementation(Libs.accompanist.insets)
 }

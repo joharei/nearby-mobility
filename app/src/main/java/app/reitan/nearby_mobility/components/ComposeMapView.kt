@@ -32,7 +32,7 @@ fun ComposeMapView(
     }
 
     AndroidView(
-        viewBlock = {
+        factory = {
             MapView(it, googleMapOptions).apply {
                 layoutParams = ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,

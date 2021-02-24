@@ -42,7 +42,7 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
                     }
                 }
 
-                Providers(LocalWearMode provides ambientMode) {
+                CompositionLocalProvider(LocalWearMode provides ambientMode) {
                     AppTheme {
                         App()
                     }

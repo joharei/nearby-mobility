@@ -6,7 +6,6 @@ include(":app")
 
 pluginManagement {
     repositories {
-        jcenter()
         google()
         gradlePluginPortal()
     }

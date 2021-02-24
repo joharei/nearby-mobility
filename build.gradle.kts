@@ -6,7 +6,7 @@ plugins {
 allprojects {
     repositories {
         google()
-        jcenter()
+        gradlePluginPortal()
     }
 }
 
@@ -15,7 +15,7 @@ task<Delete>("clean") {
 }
 buildscript {
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
     }
 }
 
