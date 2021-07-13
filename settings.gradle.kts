@@ -1,5 +1,3 @@
-import de.fayard.refreshVersions.bootstrapRefreshVersions
-
 rootProject.name = "Nearby Mobility"
 include(":common")
 include(":app")
@@ -11,13 +9,12 @@ pluginManagement {
     }
 }
 
-buildscript {
-    repositories { gradlePluginPortal() }
-    dependencies.classpath("de.fayard.refreshVersions:refreshVersions:0.9.7")
+plugins {
+    id("de.fayard.refreshVersions") version "0.10.1"
 }
 
-bootstrapRefreshVersions(
+refreshVersions {
     extraArtifactVersionKeyRules = listOf(
         file("refreshVersions-extra-rules.txt").readText()
     )
-)
+}

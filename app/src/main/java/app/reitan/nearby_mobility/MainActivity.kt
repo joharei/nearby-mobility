@@ -6,6 +6,7 @@ import android.view.View
 import androidx.compose.runtime.*
 import androidx.fragment.app.FragmentActivity
 import androidx.wear.ambient.AmbientModeSupport
+import androidx.wear.widget.DismissibleFrameLayout
 import androidx.wear.widget.SwipeDismissFrameLayout
 import app.reitan.nearby_mobility.databinding.ActivityMainBinding
 import app.reitan.nearby_mobility.tools.permissionState
@@ -24,11 +25,11 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
         ActivityMainBinding.inflate(layoutInflater).apply {
             setContentView(root)
 
-            swipeDismissRootContainer.addCallback(object :
-                SwipeDismissFrameLayout.Callback() {
-                override fun onDismissed(layout: SwipeDismissFrameLayout?) {
+            swipeDismissRootContainer.registerCallback(object :
+                DismissibleFrameLayout.Callback() {
+                override fun onDismissFinished(layout: DismissibleFrameLayout) {
                     // Hides view before exit to avoid stutter.
-                    layout?.visibility = View.GONE
+                    layout.visibility = View.GONE
                     finish()
                 }
             })

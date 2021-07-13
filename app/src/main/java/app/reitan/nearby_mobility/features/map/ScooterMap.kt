@@ -10,18 +10,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import app.reitan.nearby_mobility.components.ComposeMapView
 import app.reitan.nearby_mobility.components.rememberGoogleMapState
-import app.reitan.nearby_mobility.di.getViewModel
 import app.reitan.nearby_mobility.tools.latLng
 import app.reitan.nearby_mobility.tools.latLonBounds
 import app.reitan.nearby_mobility.tools.permissionState
 import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.WearMode
+import com.google.accompanist.insets.LocalWindowInsets
 import com.google.android.libraries.maps.CameraUpdateFactory
 import com.google.android.libraries.maps.MapView
 import com.google.android.libraries.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
-import dev.chrisbanes.accompanist.insets.LocalWindowInsets
 import kotlinx.coroutines.flow.flowOf
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Location?) {

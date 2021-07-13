@@ -12,7 +12,7 @@ import com.google.android.libraries.maps.model.LatLng
 import com.google.android.libraries.maps.model.LatLngBounds
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeoutOrNull
-import kotlin.time.seconds
+import kotlin.time.Duration
 
 @SuppressLint("MissingPermission")
 @Composable
@@ -26,7 +26,7 @@ fun lastLocation(): LocationResult {
     LaunchedEffect(locationPermission) {
         result = LocationResult.Success(
             if (locationPermission.hasPermission) {
-                withTimeoutOrNull(1.seconds) { fusedLocationClient.lastLocation.await() }
+                withTimeoutOrNull(Duration.seconds(1)) { fusedLocationClient.lastLocation.await() }
             } else null
         )
     }

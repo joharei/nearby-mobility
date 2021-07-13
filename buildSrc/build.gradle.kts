@@ -7,5 +7,5 @@ repositories {
 }
 
 dependencies {
-    api("de.fayard.refreshVersions:refreshVersions:0.9.7")
+    api("de.fayard.refreshVersions:refreshVersions:0.10.1")
 }

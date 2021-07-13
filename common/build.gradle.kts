@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Constants.CompileSdkVersion)
+    compileSdk = Constants.CompileSdkVersion
 
     defaultConfig {
-        minSdkVersion(21)
-        targetSdkVersion(Constants.TargetSdkVersion)
+        minSdk = 21
+        targetSdk = Constants.TargetSdkVersion
         consumerProguardFile("proguard-rules.pro")
     }
 
@@ -19,10 +19,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        freeCompilerArgs = freeCompilerArgs + listOf(
-            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-            "-Xopt-in=kotlin.time.ExperimentalTime"
-        )
     }
 }
 

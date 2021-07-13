@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.wear.widget.SwipeDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.wear.widget.DismissibleFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_dismiss_root_container"
     android:layout_width="match_parent"
@@ -15,4 +15,4 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </app.reitan.nearby_mobility.HorizontalScrollWorkaround>
-</androidx.wear.widget.SwipeDismissFrameLayout>
+</androidx.wear.widget.DismissibleFrameLayout>
