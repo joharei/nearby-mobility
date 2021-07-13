@@ -10,7 +10,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.google.android.libraries.maps.GoogleMap
 import com.google.android.libraries.maps.MapView
-import com.google.maps.android.ktx.*
+import com.google.maps.android.ktx.awaitMap
+import com.google.maps.android.ktx.buildGoogleMapOptions
+import com.google.maps.android.ktx.cameraIdleEvents
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -66,23 +68,15 @@ fun ComposeMapView(
 class GoogleMapState(
     private val onMapReady: (GoogleMap) -> Unit,
     private val cameraIdleListener: (GoogleMap) -> Unit,
-    private val cameraMoveListener: (GoogleMap) -> Unit,
-    private val cameraMoveCanceledListener: (GoogleMap) -> Unit,
-    private val cameraMoveStartedListener: (GoogleMap, Int) -> Unit,
 ) : State<GoogleMap?> {
     private val googleMapState: MutableState<GoogleMap?> = mutableStateOf(null)
 
     suspend fun onGoogleMapCreated(googleMap: GoogleMap) {
         googleMapState.value = googleMap
         onMapReady(googleMap)
-        googleMap.cameraEvents()
-            .collect { event ->
-                when (event) {
-                    CameraIdleEvent -> cameraIdleListener(googleMap)
-                    CameraMoveCanceledEvent -> cameraMoveCanceledListener(googleMap)
-                    CameraMoveEvent -> cameraMoveListener(googleMap)
-                    is CameraMoveStartedEvent -> cameraMoveStartedListener(googleMap, event.reason)
-                }
+        googleMap.cameraIdleEvents()
+            .collect {
+                cameraIdleListener(googleMap)
             }
     }
 
@@ -94,17 +88,11 @@ class GoogleMapState(
 fun rememberGoogleMapState(
     onMapReady: (GoogleMap) -> Unit = {},
     cameraIdleListener: (GoogleMap) -> Unit = {},
-    cameraMoveListener: (GoogleMap) -> Unit = {},
-    cameraMoveCanceledListener: (GoogleMap) -> Unit = {},
-    cameraMoveStartedListener: (GoogleMap, Int) -> Unit = { _, _ -> },
 ): GoogleMapState {
     return remember {
         GoogleMapState(
             onMapReady = onMapReady,
             cameraIdleListener = cameraIdleListener,
-            cameraMoveListener = cameraMoveListener,
-            cameraMoveCanceledListener = cameraMoveCanceledListener,
-            cameraMoveStartedListener = cameraMoveStartedListener
         )
     }
 }

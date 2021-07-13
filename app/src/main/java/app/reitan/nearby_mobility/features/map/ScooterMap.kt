@@ -2,11 +2,9 @@ package app.reitan.nearby_mobility.features.map
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.location.Location
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
@@ -24,6 +22,7 @@ import androidx.wear.compose.material.Text
 import app.reitan.nearby_mobility.R
 import app.reitan.nearby_mobility.components.ComposeMapView
 import app.reitan.nearby_mobility.components.rememberGoogleMapState
+import app.reitan.nearby_mobility.tools.lastLocation
 import app.reitan.nearby_mobility.tools.latLng
 import app.reitan.nearby_mobility.tools.latLonBounds
 import app.reitan.nearby_mobility.tools.roundScreenPadding
@@ -40,7 +39,7 @@ import kotlinx.coroutines.flow.flowOf
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Location?) {
+fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
     val wearMode = LocalWearMode.current
     val scooters by remember(wearMode) {
         when (wearMode) {
@@ -56,23 +55,10 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Locati
         cluster()
     }
 
-    val locationPermission = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
-    val systemInsets = LocalWindowInsets.current.systemBars
     val googleMapState = rememberGoogleMapState(
         onMapReady = {
-            it.setPadding(
-                systemInsets.left,
-                (systemInsets.top + 24.dp.value).toInt(),
-                systemInsets.right,
-                systemInsets.bottom
-            )
-            @SuppressLint("MissingPermission")
-            it.isMyLocationEnabled = locationPermission.hasPermission
             it.moveCamera(
-                if (location != null)
-                    CameraUpdateFactory.newLatLngZoom(location.latLng, 14f)
-                else
-                    CameraUpdateFactory.newLatLngZoom(LatLng(58.9109397, 5.7244898), 16f)
+                CameraUpdateFactory.newLatLngZoom(LatLng(58.9631, 5.731), 12f)
             )
         },
         cameraIdleListener = {
@@ -82,8 +68,22 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Locati
     )
     val googleMap = googleMapState.value
 
+    val locationPermission = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
+    val systemInsets = LocalWindowInsets.current.systemBars
+    SideEffect {
+        googleMap?.setPadding(
+            systemInsets.left,
+            (systemInsets.top + 24.dp.value).toInt(),
+            systemInsets.right,
+            systemInsets.bottom
+        )
+        @SuppressLint("MissingPermission")
+        googleMap?.isMyLocationEnabled = locationPermission.hasPermission
+    }
+
+    val context = LocalContext.current
+
     if (googleMap != null && clusterManager == null) {
-        val context = LocalContext.current
         clusterManager = ClusterManager<ScooterClusterItem>(context, googleMap).apply {
             renderer = ScooterRenderer(context, googleMap, this)
         }
@@ -144,6 +144,27 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Locati
             }
         },
         permissionNotAvailableContent = content,
-        content = content,
-    )
+    ) {
+        var gotLocation by rememberSaveable { mutableStateOf(false) }
+        LaunchedEffect(context, gotLocation, googleMap) {
+            if (!gotLocation && googleMap != null) {
+                @SuppressLint("MissingPermission")
+                val lastLocation = lastLocation(context)
+                if (lastLocation != null) {
+                    googleMap.moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(lastLocation.latLng, 16f)
+                    )
+                }
+                gotLocation = true
+            }
+        }
+        Box {
+            content()
+            Crossfade(gotLocation) {
+                if (!it) {
+                    Box(modifier = Modifier.background(MaterialTheme.colors.background))
+                }
+            }
+        }
+    }
 }

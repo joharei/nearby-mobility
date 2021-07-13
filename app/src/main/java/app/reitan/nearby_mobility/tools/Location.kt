@@ -1,13 +1,11 @@
 package app.reitan.nearby_mobility.tools
 
 import android.Manifest
-import android.annotation.SuppressLint
+import android.content.Context
 import android.location.Location
-import androidx.compose.runtime.*
-import androidx.compose.ui.platform.LocalContext
+import androidx.annotation.RequiresPermission
 import app.reitan.common.models.LatLon
 import app.reitan.common.models.LatLonBounds
-import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.LocationServices
 import com.google.android.libraries.maps.model.LatLng
 import com.google.android.libraries.maps.model.LatLngBounds
@@ -15,28 +13,11 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration
 
-@SuppressLint("MissingPermission")
-@Composable
-fun lastLocation(): LocationResult {
-    val locationPermission = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
-    val current = LocalContext.current
-    val fusedLocationClient = remember {
-        LocationServices.getFusedLocationProviderClient(current)
+@RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+suspend fun lastLocation(context: Context): Location? {
+    return withTimeoutOrNull(Duration.seconds(1)) {
+        LocationServices.getFusedLocationProviderClient(context).lastLocation.await()
     }
-    var result by remember { mutableStateOf<LocationResult>(LocationResult.Loading) }
-    LaunchedEffect(locationPermission) {
-        result = LocationResult.Success(
-            if (locationPermission.hasPermission) {
-                withTimeoutOrNull(Duration.seconds(1)) { fusedLocationClient.lastLocation.await() }
-            } else null
-        )
-    }
-    return result
-}
-
-sealed class LocationResult {
-    object Loading : LocationResult()
-    data class Success(val location: Location?) : LocationResult()
 }
 
 val Location.latLng: LatLng get() = LatLng(latitude, longitude)
