@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Nearby Mobility</string>
     <string name="intro_text">Swipe edge to exit the map.</string>
+    <string name="location_rationale">The location permission is used to show your location in the map.</string>
+    <string name="location_rationale_grant">Grant permission</string>
+    <string name="location_rationale_cancel">Disable location</string>
 </resources>

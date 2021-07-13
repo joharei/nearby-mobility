@@ -3,19 +3,35 @@ package app.reitan.nearby_mobility.features.map
 import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Location
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.ButtonDefaults
+import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.Text
+import app.reitan.nearby_mobility.R
 import app.reitan.nearby_mobility.components.ComposeMapView
 import app.reitan.nearby_mobility.components.rememberGoogleMapState
 import app.reitan.nearby_mobility.tools.latLng
 import app.reitan.nearby_mobility.tools.latLonBounds
-import app.reitan.nearby_mobility.tools.permissionState
+import app.reitan.nearby_mobility.tools.roundScreenPadding
 import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.WearMode
 import com.google.accompanist.insets.LocalWindowInsets
+import com.google.accompanist.permissions.PermissionRequired
+import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.libraries.maps.CameraUpdateFactory
 import com.google.android.libraries.maps.MapView
 import com.google.android.libraries.maps.model.LatLng
@@ -40,7 +56,7 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Locati
         cluster()
     }
 
-    val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
+    val locationPermission = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
     val systemInsets = LocalWindowInsets.current.systemBars
     val googleMapState = rememberGoogleMapState(
         onMapReady = {
@@ -81,10 +97,53 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel(), location: Locati
         }
     }
 
+    val content = @Composable {
+        ComposeMapView(
+            modifier = Modifier.fillMaxSize(),
+            onMapViewCreated = { mapView = it },
+            onGoogleMapCreated = { googleMapState.onGoogleMapCreated(it) },
+        )
+    }
 
-    ComposeMapView(
-        modifier = Modifier.fillMaxSize(),
-        onMapViewCreated = { mapView = it },
-        onGoogleMapCreated = { googleMapState.onGoogleMapCreated(it) },
+    var doNotShowRationale by rememberSaveable { mutableStateOf(false) }
+    PermissionRequired(
+        permissionState = locationPermission,
+        permissionNotGrantedContent = {
+            if (doNotShowRationale) {
+                content()
+            } else {
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(16.dp)
+                        .roundScreenPadding(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+                ) {
+                    Text(
+                        text = stringResource(R.string.location_rationale),
+                        style = MaterialTheme.typography.body1,
+                        textAlign = TextAlign.Center,
+                    )
+                    Button(onClick = locationPermission::launchPermissionRequest) {
+                        Text(
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                            text = stringResource(R.string.location_rationale_grant),
+                        )
+                    }
+                    Button(
+                        onClick = { doNotShowRationale = true },
+                        colors = ButtonDefaults.secondaryButtonColors(),
+                    ) {
+                        Text(
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                            text = stringResource(R.string.location_rationale_cancel),
+                        )
+                    }
+                }
+            }
+        },
+        permissionNotAvailableContent = content,
+        content = content,
     )
 }

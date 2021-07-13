@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import app.reitan.common.models.LatLon
 import app.reitan.common.models.LatLonBounds
+import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.LocationServices
 import com.google.android.libraries.maps.model.LatLng
 import com.google.android.libraries.maps.model.LatLngBounds
@@ -17,7 +18,7 @@ import kotlin.time.Duration
 @SuppressLint("MissingPermission")
 @Composable
 fun lastLocation(): LocationResult {
-    val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
+    val locationPermission = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
     val current = LocalContext.current
     val fusedLocationClient = remember {
         LocationServices.getFusedLocationProviderClient(current)

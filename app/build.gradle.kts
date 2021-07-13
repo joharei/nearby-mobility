@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "app.reitan.nearby_mobility"
-        minSdk = 23
+        minSdk = 25
         targetSdk = Constants.TargetSdkVersion
         versionCode = System.getenv("BUILD_NUMBER")?.toIntOrNull() ?: 1
         versionName = "1.0"
@@ -99,9 +99,10 @@ dependencies {
     implementation(AndroidX.compose.ui.tooling)
     implementation(AndroidX.compose.foundation)
     implementation(AndroidX.compose.foundation.layout)
-    implementation(AndroidX.compose.material)
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
+    implementation("androidx.wear.compose:compose-material:_")
     implementation(AndroidX.activity.compose)
     implementation(Google.accompanist.insets)
+    implementation("com.google.accompanist:accompanist-permissions:_")
 }

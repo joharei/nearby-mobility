@@ -1,15 +1,15 @@
 package app.reitan.nearby_mobility
 
-import android.Manifest
 import android.os.Bundle
 import android.view.View
-import androidx.compose.runtime.*
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.fragment.app.FragmentActivity
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.widget.DismissibleFrameLayout
-import androidx.wear.widget.SwipeDismissFrameLayout
 import app.reitan.nearby_mobility.databinding.ActivityMainBinding
-import app.reitan.nearby_mobility.tools.permissionState
 import app.reitan.nearby_mobility.ui.AppTheme
 import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.WearMode
@@ -35,14 +35,6 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
             })
 
             composeView.setContent {
-                val locationPermission = permissionState(Manifest.permission.ACCESS_FINE_LOCATION)
-                SideEffect {
-                    // TODO: handle locationPermission.shouldShowRationale
-                    if (!locationPermission.hasPermission) {
-                        locationPermission.launchPermissionRequest()
-                    }
-                }
-
                 CompositionLocalProvider(LocalWearMode provides ambientMode) {
                     AppTheme {
                         App()
