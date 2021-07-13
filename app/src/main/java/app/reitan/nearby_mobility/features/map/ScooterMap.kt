@@ -92,8 +92,14 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
     var mapView by remember { mutableStateOf<MapView?>(null) }
     SideEffect {
         when (wearMode) {
-            WearMode.Active -> mapView?.onExitAmbient()
-            is WearMode.Ambient -> mapView?.onEnterAmbient(wearMode.ambientDetails)
+            WearMode.Active -> {
+                mapView?.onExitAmbient()
+                googleMap?.uiSettings?.isZoomControlsEnabled = true
+            }
+            is WearMode.Ambient -> {
+                mapView?.onEnterAmbient(wearMode.ambientDetails)
+                googleMap?.uiSettings?.isZoomControlsEnabled = false
+            }
         }
     }
 
