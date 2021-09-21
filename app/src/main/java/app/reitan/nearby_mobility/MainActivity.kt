@@ -1,6 +1,7 @@
 package app.reitan.nearby_mobility
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue

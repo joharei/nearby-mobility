@@ -25,7 +25,7 @@ android {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    implementation(Libs.koin.core)
+    implementation(Koin.core)
 
     implementation(KotlinX.serialization.json)
     implementation(Ktor.client.cio)

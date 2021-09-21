@@ -1,4 +1,4 @@
 object Constants {
-    const val CompileSdkVersion = 30
-    const val TargetSdkVersion = CompileSdkVersion
+    const val CompileSdkVersion = 31
+    const val TargetSdkVersion = 30
 }

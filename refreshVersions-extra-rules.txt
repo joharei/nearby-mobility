@@ -1,8 +1,8 @@
 androidx.compose.*:*
 ^^^^^^^^.^^^^^^^
 
-io.insert-koin:koin(-*)
-          ^^^^
+androidx.wear.compose:compose(-*)
+^^^^^^^^.^^^^.^^^^^^^.^^^^^^^
 
 com.google.maps.android:maps-utils-ktx
     ^^^^^^^^^^^^                   ^^^

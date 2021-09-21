@@ -1,6 +1,7 @@
 package app.reitan.nearby_mobility.components
 
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -8,8 +9,10 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.google.android.libraries.maps.GoogleMap
-import com.google.android.libraries.maps.MapView
+import app.reitan.nearby_mobility.R
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.ktx.awaitMap
 import com.google.maps.android.ktx.buildGoogleMapOptions
 import com.google.maps.android.ktx.cameraIdleEvents
@@ -29,7 +32,6 @@ fun ComposeMapView(
         buildGoogleMapOptions {
             ambientEnabled(true)
             zoomControlsEnabled(true)
-            mapId("e613df2596ebc05")
         }
     }
 
@@ -56,7 +58,14 @@ fun ComposeMapView(
                 onMapViewCreated(this)
 
                 coroutineScope.launch {
-                    onGoogleMapCreated(awaitMap())
+                    val map = awaitMap()
+                    val success = runCatching {
+                        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(it, R.raw.map_style))
+                    }.getOrDefault(false)
+                    if (!success) {
+                        Log.w("NearbyMobility", "Failed to load map style")
+                    }
+                    onGoogleMapCreated(map)
                 }
             }
         },

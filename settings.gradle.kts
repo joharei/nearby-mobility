@@ -10,11 +10,14 @@ pluginManagement {
 }
 
 plugins {
-    id("de.fayard.refreshVersions") version "0.10.1"
+    id("de.fayard.refreshVersions") version "0.21.0"
 }
 
 refreshVersions {
     extraArtifactVersionKeyRules = listOf(
         file("refreshVersions-extra-rules.txt").readText()
     )
+    rejectVersionIf {
+        candidate.stabilityLevel.isLessStableThan(current.stabilityLevel)
+    }
 }

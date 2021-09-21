@@ -4,10 +4,10 @@ import android.content.Context
 import app.reitan.common.models.Operator
 import app.reitan.nearby_mobility.R
 import app.reitan.nearby_mobility.tools.bitmapDescriptorFromVector
-import com.google.android.libraries.maps.GoogleMap
-import com.google.android.libraries.maps.model.BitmapDescriptor
-import com.google.android.libraries.maps.model.Marker
-import com.google.android.libraries.maps.model.MarkerOptions
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer

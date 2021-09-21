@@ -75,17 +75,15 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(KotlinX.coroutines.android)
     implementation(KotlinX.coroutines.playServices)
-    implementation(Libs.koin.core)
-    implementation(Libs.koin.android)
-    implementation(Libs.koin.androidX.compose)
+    implementation(Koin.core)
+    implementation(Koin.android)
+    implementation(Koin.compose)
 
     implementation(Google.android.playServices.location)
-    implementation(Google.android.maps.mapsV3)
+    implementation(Google.android.playServices.maps)
     implementation(Google.android.maps.mapsKtx)
     implementation(Google.android.maps.mapsUtils)
-
-    // Needed for Ambient mode to work with R8
-    compileOnly(Google.android.wearable)
+    implementation(Google.android.maps.mapsUtilsKtx)
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.wear)
@@ -101,8 +99,8 @@ dependencies {
     implementation(AndroidX.compose.foundation.layout)
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
-    implementation("androidx.wear.compose:compose-material:_")
+    implementation(AndroidX.wear.compose.material)
     implementation(AndroidX.activity.compose)
     implementation(Google.accompanist.insets)
-    implementation("com.google.accompanist:accompanist-permissions:_")
+    implementation(Google.accompanist.permissions)
 }

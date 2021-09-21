@@ -31,9 +31,9 @@ import app.reitan.nearby_mobility.ui.WearMode
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.permissions.PermissionRequired
 import com.google.accompanist.permissions.rememberPermissionState
-import com.google.android.libraries.maps.CameraUpdateFactory
-import com.google.android.libraries.maps.MapView
-import com.google.android.libraries.maps.model.LatLng
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 import kotlinx.coroutines.flow.flowOf
 import org.koin.androidx.compose.getViewModel
