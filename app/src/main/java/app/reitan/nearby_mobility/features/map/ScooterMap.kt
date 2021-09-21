@@ -12,6 +12,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -22,10 +23,7 @@ import androidx.wear.compose.material.Text
 import app.reitan.nearby_mobility.R
 import app.reitan.nearby_mobility.components.ComposeMapView
 import app.reitan.nearby_mobility.components.rememberGoogleMapState
-import app.reitan.nearby_mobility.tools.lastLocation
-import app.reitan.nearby_mobility.tools.latLng
-import app.reitan.nearby_mobility.tools.latLonBounds
-import app.reitan.nearby_mobility.tools.roundScreenPadding
+import app.reitan.nearby_mobility.tools.*
 import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.WearMode
 import com.google.accompanist.insets.LocalWindowInsets
@@ -70,12 +68,13 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
 
     val locationPermission = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
     val systemInsets = LocalWindowInsets.current.systemBars
+    val bottomPaddingPx = with(LocalDensity.current) { 8.dp.roundToPx() }
     SideEffect {
         googleMap?.setPadding(
             systemInsets.left,
-            (systemInsets.top + 24.dp.value).toInt(),
+            systemInsets.top,
             systemInsets.right,
-            systemInsets.bottom
+            systemInsets.bottom + bottomPaddingPx,
         )
         @SuppressLint("MissingPermission")
         googleMap?.isMyLocationEnabled = locationPermission.hasPermission
@@ -91,6 +90,7 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
 
     var mapView by remember { mutableStateOf<MapView?>(null) }
     SideEffect {
+        mapView?.alignZoomButtonsToBottom()
         when (wearMode) {
             WearMode.Active -> {
                 mapView?.onExitAmbient()

@@ -15,7 +15,8 @@ allprojects {
         kotlinOptions.freeCompilerArgs = kotlinOptions.freeCompilerArgs + listOf(
             "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
             "-Xopt-in=kotlin.time.ExperimentalTime",
-            "-Xopt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi"
+            "-Xopt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi",
+            "-Xopt-in=androidx.wear.compose.material.ExperimentalWearMaterialApi"
         )
     }
 }
