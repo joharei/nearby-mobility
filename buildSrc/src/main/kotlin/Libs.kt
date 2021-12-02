@@ -1,15 +1,18 @@
 @file:Suppress("unused", "UnstableApiUsage")
 
-object Maps {
-    const val mapsKtx = "com.google.maps.android:maps-ktx:_"
-    const val mapsUtils = "com.google.maps.android:android-maps-utils:_"
-    const val mapsUtilsKtx = "com.google.maps.android:maps-utils-ktx:_"
+import de.fayard.refreshVersions.core.DependencyGroup
+import de.fayard.refreshVersions.core.DependencyNotation
+
+object Maps : DependencyGroup("com.google.maps.android") {
+    val mapsKtx = module("maps-ktx")
+    val mapsUtils = module("android-maps-utils")
+    val mapsUtilsKtx = module("maps-utils-ktx")
 }
 
-val Google.Android.PlayServices.maps: String
-    get() = "com.google.android.gms:play-services-maps:_"
+val Google.Android.PlayServices.maps: DependencyNotation
+    get() = module("play-services-maps")
 
 val Google.Android.maps: Maps get() = Maps
 
-val Google.Accompanist.permissions: String get() =
-    "com.google.accompanist:accompanist-permissions:_"
+val Google.Accompanist.permissions: DependencyNotation
+    get() = module("accompanist-permissions")

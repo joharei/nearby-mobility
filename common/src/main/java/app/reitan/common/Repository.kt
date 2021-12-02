@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.transformLatest
 import kotlin.time.Duration
+import kotlin.time.minutes
 
 class Repository internal constructor(
     private val rydeApi: RydeApi,
@@ -31,7 +32,7 @@ class Repository internal constructor(
                         .awaitAll()
                         .flatten()
                     emit(scooters)
-                    delay(Duration.minutes(1))
+                    delay(1.minutes)
                 } while (true)
             }
         }.distinctUntilChanged()

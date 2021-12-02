@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "app.reitan.nearby_mobility"
-        minSdk = 25
+        minSdk = Constants.MinSdkVersion
         targetSdk = Constants.TargetSdkVersion
         versionCode = System.getenv("BUILD_NUMBER")?.toIntOrNull() ?: 1
         versionName = "1.0"
@@ -21,14 +21,6 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = "11"
-    }
     buildFeatures {
         compose = true
         viewBinding = true

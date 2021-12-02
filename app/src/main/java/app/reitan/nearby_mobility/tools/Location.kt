@@ -12,10 +12,11 @@ import com.google.android.gms.maps.model.LatLngBounds
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 @RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
 suspend fun lastLocation(context: Context): Location? {
-    return withTimeoutOrNull(Duration.seconds(1)) {
+    return withTimeoutOrNull(1.seconds) {
         LocationServices.getFusedLocationProviderClient(context).lastLocation.await()
     }
 }
