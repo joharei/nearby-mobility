@@ -1,10 +1,10 @@
 package app.reitan.common
 
+import app.reitan.common.entur.EnturApi
 import app.reitan.common.models.LatLon
 import app.reitan.common.models.LatLonBounds
 import app.reitan.common.models.Scooter
 import app.reitan.common.ryde.RydeApi
-import app.reitan.common.tier.TierApi
 import app.reitan.common.tools.distance
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -14,12 +14,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.transformLatest
-import kotlin.time.Duration
-import kotlin.time.minutes
+import kotlin.time.Duration.Companion.minutes
 
 class Repository internal constructor(
     private val rydeApi: RydeApi,
-    private val tierApi: TierApi,
+    private val enturApi: EnturApi,
 ) {
     val visibleRegion = MutableStateFlow<LatLonBounds?>(null)
 
@@ -27,7 +26,7 @@ class Repository internal constructor(
         .transformLatest { visibleRegion ->
             coroutineScope {
                 do {
-                    val scooters = listOf(rydeApi, tierApi)
+                    val scooters = listOf(rydeApi, enturApi)
                         .map { async { fetchScooters(it, visibleRegion) } }
                         .awaitAll()
                         .flatten()

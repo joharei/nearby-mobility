@@ -4,9 +4,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class Scooter(
-    val operator: Operator = Operator.Unknown,
     val lat: Double,
     val lon: Double,
-    val code: String? = null,
-    val battery: Int? = null,
+    val system: System,
 )
+
+@Serializable
+internal data class System(val operator: OperatorObject)
+
+@Serializable
+internal data class OperatorObject(val id: Operator = Operator.Unknown)

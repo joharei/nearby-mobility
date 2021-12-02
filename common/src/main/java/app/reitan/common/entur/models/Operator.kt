@@ -5,19 +5,19 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal enum class Operator {
-    @SerialName("voi")
+    @SerialName("YVO:Operator:voi")
     Voi,
 
-    @SerialName("tier")
+    @SerialName("YTI:Operator:Tier")
     Tier,
 
-    @SerialName("zvipp")
+    @SerialName("YZV:Operator:zvipp")
     Zvipp,
 
-    @SerialName("lime")
+    @SerialName("YLI:Operator:lime")
     Lime,
 
-    @SerialName("bolt")
+    @SerialName("YBO:Operator:bolt")
     Bolt,
 
     Unknown,

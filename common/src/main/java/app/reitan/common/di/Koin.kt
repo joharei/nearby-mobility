@@ -4,7 +4,6 @@ import android.util.Log
 import app.reitan.common.Repository
 import app.reitan.common.entur.EnturApi
 import app.reitan.common.ryde.RydeApi
-import app.reitan.common.tier.TierApi
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
@@ -26,7 +25,6 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single { Repository(get(), get()) }
     single { RydeApi(get()) }
     single { EnturApi(get()) }
-    single { TierApi(get()) }
 }
 
 fun createJson() = Json {
