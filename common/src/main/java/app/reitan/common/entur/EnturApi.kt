@@ -33,7 +33,9 @@ internal class EnturApi(private val client: HttpClient) : ScooterApi {
                         }
                       }
                     }
-                    """.trimIndent()
+                    """
+                    .trimIndent()
+                    .replace(" ", "")
             )
 
             header("ET-Client-Name", "johan_reitan-nearby_mobility")
