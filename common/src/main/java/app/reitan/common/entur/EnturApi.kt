@@ -7,6 +7,7 @@ import app.reitan.common.models.LatLon
 import app.reitan.common.models.Operator
 import app.reitan.common.models.Scooter
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlin.math.roundToInt
@@ -18,10 +19,11 @@ internal class EnturApi(private val client: HttpClient) : ScooterApi {
         centerLon: Double,
         radiusMeters: Double,
     ): List<Scooter> =
-        client.post<EnturResponse>("https://api.entur.io/mobility/v2/graphql") {
+        client.post("https://api.entur.io/mobility/v2/graphql") {
             contentType(ContentType.Application.Json)
-            body = GraphQLQuery(
-                query = """
+            setBody(
+                GraphQLQuery(
+                    query = """
                     {
                       vehicles(lat:$centerLat, lon:$centerLon, range: ${radiusMeters.roundToInt()}, count: 50, formFactors: SCOOTER) {
                         lat
@@ -34,12 +36,14 @@ internal class EnturApi(private val client: HttpClient) : ScooterApi {
                       }
                     }
                     """
-                    .trimIndent()
-                    .replace(" ", "")
+                        .trimIndent()
+                        .replace(" ", "")
+                )
             )
 
             header("ET-Client-Name", "johan_reitan-nearby_mobility")
         }
+            .body<EnturResponse>()
             .data.vehicles
             .map {
                 Scooter(

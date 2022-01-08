@@ -21,7 +21,7 @@ dependencies {
 
     implementation(KotlinX.serialization.json)
     implementation(Ktor.client.cio)
-    implementation(Ktor.client.json)
-    implementation(Ktor.client.serialization)
+    implementation("io.ktor:ktor-client-content-negotiation:_")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:_")
     implementation(Ktor.client.logging)
 }

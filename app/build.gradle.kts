@@ -26,7 +26,7 @@ android {
         viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = versionFor("version.androidx.compose")
+        kotlinCompilerExtensionVersion = versionFor("version.androidx.compose.compiler")
     }
 
     signingConfigs {
@@ -79,11 +79,12 @@ dependencies {
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.wear)
-    implementation(AndroidX.activityKtx)
-    implementation(AndroidX.fragmentKtx)
+    implementation(AndroidX.activity.ktx)
+    implementation(AndroidX.fragment.ktx)
     implementation(AndroidX.lifecycle.viewModelCompose)
 
     // Compose
+    implementation(AndroidX.compose.compiler)
     implementation(AndroidX.compose.runtime)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.tooling)

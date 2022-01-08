@@ -5,9 +5,9 @@ import app.reitan.common.Repository
 import app.reitan.common.entur.EnturApi
 import app.reitan.common.ryde.RydeApi
 import io.ktor.client.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.logging.*
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
@@ -33,8 +33,8 @@ fun createJson() = Json {
 }
 
 fun createHttpClient(json: Json, enableNetworkLogs: Boolean) = HttpClient {
-    install(JsonFeature) {
-        serializer = KotlinxSerializer(json)
+    install(ContentNegotiation) {
+        json(json)
     }
     if (enableNetworkLogs) {
         install(Logging) {

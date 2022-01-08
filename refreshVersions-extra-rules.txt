@@ -1,6 +1,9 @@
 androidx.compose.*:*
 ^^^^^^^^.^^^^^^^
 
+androidx.compose.compiler:compiler
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
 androidx.wear.compose:compose(-*)
 ^^^^^^^^.^^^^.^^^^^^^.^^^^^^^
 
