@@ -1,7 +1,7 @@
 package app.reitan.nearby_mobility.features.map
 
 import android.content.Context
-import app.reitan.common.models.Operator
+import app.reitan.shared.models.Operator
 import app.reitan.nearby_mobility.R
 import app.reitan.nearby_mobility.tools.bitmapDescriptorFromVector
 import com.google.android.gms.maps.GoogleMap

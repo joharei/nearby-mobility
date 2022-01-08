@@ -28,6 +28,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = versionFor("version.androidx.compose.compiler")
     }
+    kotlin {
+        jvmToolchain {
+            (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(11))
+        }
+    }
 
     signingConfigs {
         create("release") {
@@ -62,8 +67,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
 
+    implementation(project(":shared"))
     implementation(kotlin("stdlib"))
     implementation(KotlinX.coroutines.android)
     implementation(KotlinX.coroutines.playServices)

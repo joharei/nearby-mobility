@@ -4,14 +4,13 @@ import android.Manifest
 import android.content.Context
 import android.location.Location
 import androidx.annotation.RequiresPermission
-import app.reitan.common.models.LatLon
-import app.reitan.common.models.LatLonBounds
+import app.reitan.shared.models.LatLon
+import app.reitan.shared.models.LatLonBounds
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeoutOrNull
-import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
 @RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)

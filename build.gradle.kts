@@ -1,5 +1,4 @@
 import com.android.build.gradle.BaseExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -31,11 +30,6 @@ allprojects {
                 compileOptions {
                     sourceCompatibility = JavaVersion.VERSION_11
                     targetCompatibility = JavaVersion.VERSION_11
-                }
-            }
-            configure<KotlinAndroidProjectExtension> {
-                jvmToolchain {
-                    (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(11))
                 }
             }
         }

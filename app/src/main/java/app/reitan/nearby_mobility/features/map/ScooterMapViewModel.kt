@@ -2,7 +2,7 @@ package app.reitan.nearby_mobility.features.map
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import app.reitan.common.Repository
+import app.reitan.shared.Repository
 import kotlinx.coroutines.flow.catch
 
 class ScooterMapViewModel(repo: Repository) : ViewModel() {

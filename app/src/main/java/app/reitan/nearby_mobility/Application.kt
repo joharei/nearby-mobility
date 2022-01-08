@@ -1,7 +1,7 @@
 package app.reitan.nearby_mobility
 
 import android.app.Application
-import app.reitan.common.di.initKoin
+import app.reitan.shared.di.initKoin
 import app.reitan.nearby_mobility.di.appModule
 import com.google.android.gms.maps.MapsInitializer
 import org.koin.android.ext.koin.androidContext

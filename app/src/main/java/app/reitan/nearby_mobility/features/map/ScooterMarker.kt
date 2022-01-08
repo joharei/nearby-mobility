@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import app.reitan.common.models.Operator
+import app.reitan.shared.models.Operator
 import kotlin.math.pow
 import kotlin.math.sqrt
 

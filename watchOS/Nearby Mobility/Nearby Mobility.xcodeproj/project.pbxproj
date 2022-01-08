@@ -1,0 +1,858 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04AC65F0278B292F00FDC00E /* Nearby Mobility WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 04AC65EF278B292F00FDC00E /* Nearby Mobility WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		04AC65F5278B293000FDC00E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AC65F4278B293000FDC00E /* Assets.xcassets */; };
+		04AC65FB278B293000FDC00E /* Nearby Mobility WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 04AC65FA278B293000FDC00E /* Nearby Mobility WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		04AC6600278B293000FDC00E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC65FF278B293000FDC00E /* ContentView.swift */; };
+		04AC6602278B293000FDC00E /* Nearby_MobilityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC6601278B293000FDC00E /* Nearby_MobilityApp.swift */; };
+		04AC6604278B293000FDC00E /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC6603278B293000FDC00E /* ComplicationController.swift */; };
+		04AC6606278B293100FDC00E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AC6605278B293100FDC00E /* Assets.xcassets */; };
+		04AC6609278B293100FDC00E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04AC6608278B293100FDC00E /* Preview Assets.xcassets */; };
+		04AC6614278B293100FDC00E /* Nearby_MobilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC6613278B293100FDC00E /* Nearby_MobilityTests.swift */; };
+		04AC661E278B293100FDC00E /* Nearby_MobilityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC661D278B293100FDC00E /* Nearby_MobilityUITests.swift */; };
+		04AC6620278B293100FDC00E /* Nearby_MobilityUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC661F278B293100FDC00E /* Nearby_MobilityUITestsLaunchTests.swift */; };
+		04AC6637278B3ED200FDC00E /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC6636278B3ED200FDC00E /* ExtensionDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04AC65F1278B292F00FDC00E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04AC65E5278B292F00FDC00E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04AC65EE278B292F00FDC00E;
+			remoteInfo = "Nearby Mobility WatchKit App";
+		};
+		04AC65FC278B293000FDC00E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04AC65E5278B292F00FDC00E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04AC65F9278B293000FDC00E;
+			remoteInfo = "Nearby Mobility WatchKit Extension";
+		};
+		04AC6610278B293100FDC00E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04AC65E5278B292F00FDC00E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04AC65F9278B293000FDC00E;
+			remoteInfo = "Nearby Mobility WatchKit Extension";
+		};
+		04AC661A278B293100FDC00E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04AC65E5278B292F00FDC00E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04AC65EE278B292F00FDC00E;
+			remoteInfo = "Nearby Mobility WatchKit App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		04AC6626278B293100FDC00E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				04AC65FB278B293000FDC00E /* Nearby Mobility WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04AC662A278B293100FDC00E /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				04AC65F0278B292F00FDC00E /* Nearby Mobility WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		04AC65EB278B292F00FDC00E /* Nearby Mobility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nearby Mobility.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04AC65EF278B292F00FDC00E /* Nearby Mobility WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nearby Mobility WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04AC65F4278B293000FDC00E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04AC65FA278B293000FDC00E /* Nearby Mobility WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Nearby Mobility WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04AC65FF278B293000FDC00E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		04AC6601278B293000FDC00E /* Nearby_MobilityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nearby_MobilityApp.swift; sourceTree = "<group>"; };
+		04AC6603278B293000FDC00E /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		04AC6605278B293100FDC00E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04AC6608278B293100FDC00E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		04AC660A278B293100FDC00E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04AC660F278B293100FDC00E /* Nearby MobilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nearby MobilityTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04AC6613278B293100FDC00E /* Nearby_MobilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nearby_MobilityTests.swift; sourceTree = "<group>"; };
+		04AC6619278B293100FDC00E /* Nearby MobilityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nearby MobilityUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04AC661D278B293100FDC00E /* Nearby_MobilityUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nearby_MobilityUITests.swift; sourceTree = "<group>"; };
+		04AC661F278B293100FDC00E /* Nearby_MobilityUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nearby_MobilityUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		04AC6636278B3ED200FDC00E /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04AC65F7278B293000FDC00E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04AC660C278B293100FDC00E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04AC6616278B293100FDC00E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04AC65E4278B292F00FDC00E = {
+			isa = PBXGroup;
+			children = (
+				04AC65F3278B292F00FDC00E /* Nearby Mobility WatchKit App */,
+				04AC65FE278B293000FDC00E /* Nearby Mobility WatchKit Extension */,
+				04AC6612278B293100FDC00E /* Nearby MobilityTests */,
+				04AC661C278B293100FDC00E /* Nearby MobilityUITests */,
+				04AC65EC278B292F00FDC00E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		04AC65EC278B292F00FDC00E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04AC65EB278B292F00FDC00E /* Nearby Mobility.app */,
+				04AC65EF278B292F00FDC00E /* Nearby Mobility WatchKit App.app */,
+				04AC65FA278B293000FDC00E /* Nearby Mobility WatchKit Extension.appex */,
+				04AC660F278B293100FDC00E /* Nearby MobilityTests.xctest */,
+				04AC6619278B293100FDC00E /* Nearby MobilityUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04AC65F3278B292F00FDC00E /* Nearby Mobility WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				04AC65F4278B293000FDC00E /* Assets.xcassets */,
+			);
+			path = "Nearby Mobility WatchKit App";
+			sourceTree = "<group>";
+		};
+		04AC65FE278B293000FDC00E /* Nearby Mobility WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				04AC6636278B3ED200FDC00E /* ExtensionDelegate.swift */,
+				04AC65FF278B293000FDC00E /* ContentView.swift */,
+				04AC6601278B293000FDC00E /* Nearby_MobilityApp.swift */,
+				04AC6603278B293000FDC00E /* ComplicationController.swift */,
+				04AC6605278B293100FDC00E /* Assets.xcassets */,
+				04AC660A278B293100FDC00E /* Info.plist */,
+				04AC6607278B293100FDC00E /* Preview Content */,
+			);
+			path = "Nearby Mobility WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		04AC6607278B293100FDC00E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				04AC6608278B293100FDC00E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		04AC6612278B293100FDC00E /* Nearby MobilityTests */ = {
+			isa = PBXGroup;
+			children = (
+				04AC6613278B293100FDC00E /* Nearby_MobilityTests.swift */,
+			);
+			path = "Nearby MobilityTests";
+			sourceTree = "<group>";
+		};
+		04AC661C278B293100FDC00E /* Nearby MobilityUITests */ = {
+			isa = PBXGroup;
+			children = (
+				04AC661D278B293100FDC00E /* Nearby_MobilityUITests.swift */,
+				04AC661F278B293100FDC00E /* Nearby_MobilityUITestsLaunchTests.swift */,
+			);
+			path = "Nearby MobilityUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04AC65EA278B292F00FDC00E /* Nearby Mobility */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04AC662B278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby Mobility" */;
+			buildPhases = (
+				04AC65E9278B292F00FDC00E /* Resources */,
+				04AC662A278B293100FDC00E /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04AC65F2278B292F00FDC00E /* PBXTargetDependency */,
+			);
+			name = "Nearby Mobility";
+			productName = "Nearby Mobility";
+			productReference = 04AC65EB278B292F00FDC00E /* Nearby Mobility.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		04AC65EE278B292F00FDC00E /* Nearby Mobility WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04AC6627278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby Mobility WatchKit App" */;
+			buildPhases = (
+				04AC65ED278B292F00FDC00E /* Resources */,
+				04AC6626278B293100FDC00E /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04AC65FD278B293000FDC00E /* PBXTargetDependency */,
+			);
+			name = "Nearby Mobility WatchKit App";
+			productName = "Nearby Mobility WatchKit App";
+			productReference = 04AC65EF278B292F00FDC00E /* Nearby Mobility WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		04AC65F9278B293000FDC00E /* Nearby Mobility WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04AC6623278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby Mobility WatchKit Extension" */;
+			buildPhases = (
+				04AC6635278B29BE00FDC00E /* ShellScript */,
+				04AC65F6278B293000FDC00E /* Sources */,
+				04AC65F7278B293000FDC00E /* Frameworks */,
+				04AC65F8278B293000FDC00E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Nearby Mobility WatchKit Extension";
+			productName = "Nearby Mobility WatchKit Extension";
+			productReference = 04AC65FA278B293000FDC00E /* Nearby Mobility WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		04AC660E278B293100FDC00E /* Nearby MobilityTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04AC662E278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby MobilityTests" */;
+			buildPhases = (
+				04AC660B278B293100FDC00E /* Sources */,
+				04AC660C278B293100FDC00E /* Frameworks */,
+				04AC660D278B293100FDC00E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04AC6611278B293100FDC00E /* PBXTargetDependency */,
+			);
+			name = "Nearby MobilityTests";
+			productName = "Nearby MobilityTests";
+			productReference = 04AC660F278B293100FDC00E /* Nearby MobilityTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		04AC6618278B293100FDC00E /* Nearby MobilityUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04AC6631278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby MobilityUITests" */;
+			buildPhases = (
+				04AC6615278B293100FDC00E /* Sources */,
+				04AC6616278B293100FDC00E /* Frameworks */,
+				04AC6617278B293100FDC00E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04AC661B278B293100FDC00E /* PBXTargetDependency */,
+			);
+			name = "Nearby MobilityUITests";
+			productName = "Nearby MobilityUITests";
+			productReference = 04AC6619278B293100FDC00E /* Nearby MobilityUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04AC65E5278B292F00FDC00E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					04AC65EA278B292F00FDC00E = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					04AC65EE278B292F00FDC00E = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					04AC65F9278B293000FDC00E = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					04AC660E278B293100FDC00E = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 04AC65F9278B293000FDC00E;
+					};
+					04AC6618278B293100FDC00E = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 04AC65EE278B292F00FDC00E;
+					};
+				};
+			};
+			buildConfigurationList = 04AC65E8278B292F00FDC00E /* Build configuration list for PBXProject "Nearby Mobility" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04AC65E4278B292F00FDC00E;
+			productRefGroup = 04AC65EC278B292F00FDC00E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04AC65EA278B292F00FDC00E /* Nearby Mobility */,
+				04AC65EE278B292F00FDC00E /* Nearby Mobility WatchKit App */,
+				04AC65F9278B293000FDC00E /* Nearby Mobility WatchKit Extension */,
+				04AC660E278B293100FDC00E /* Nearby MobilityTests */,
+				04AC6618278B293100FDC00E /* Nearby MobilityUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04AC65E9278B292F00FDC00E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04AC65ED278B292F00FDC00E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AC65F5278B293000FDC00E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04AC65F8278B293000FDC00E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AC6609278B293100FDC00E /* Preview Assets.xcassets in Resources */,
+				04AC6606278B293100FDC00E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04AC660D278B293100FDC00E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04AC6617278B293100FDC00E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04AC6635278B29BE00FDC00E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT/../..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04AC65F6278B293000FDC00E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AC6600278B293000FDC00E /* ContentView.swift in Sources */,
+				04AC6602278B293000FDC00E /* Nearby_MobilityApp.swift in Sources */,
+				04AC6637278B3ED200FDC00E /* ExtensionDelegate.swift in Sources */,
+				04AC6604278B293000FDC00E /* ComplicationController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04AC660B278B293100FDC00E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AC6614278B293100FDC00E /* Nearby_MobilityTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04AC6615278B293100FDC00E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AC6620278B293100FDC00E /* Nearby_MobilityUITestsLaunchTests.swift in Sources */,
+				04AC661E278B293100FDC00E /* Nearby_MobilityUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04AC65F2278B292F00FDC00E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04AC65EE278B292F00FDC00E /* Nearby Mobility WatchKit App */;
+			targetProxy = 04AC65F1278B292F00FDC00E /* PBXContainerItemProxy */;
+		};
+		04AC65FD278B293000FDC00E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04AC65F9278B293000FDC00E /* Nearby Mobility WatchKit Extension */;
+			targetProxy = 04AC65FC278B293000FDC00E /* PBXContainerItemProxy */;
+		};
+		04AC6611278B293100FDC00E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04AC65F9278B293000FDC00E /* Nearby Mobility WatchKit Extension */;
+			targetProxy = 04AC6610278B293100FDC00E /* PBXContainerItemProxy */;
+		};
+		04AC661B278B293100FDC00E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04AC65EE278B292F00FDC00E /* Nearby Mobility WatchKit App */;
+			targetProxy = 04AC661A278B293100FDC00E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		04AC6621278B293100FDC00E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		04AC6622278B293100FDC00E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04AC6624278B293100FDC00E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Nearby Mobility WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Nearby Mobility WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Nearby Mobility WatchKit Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					shared,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-Mobility.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Debug;
+		};
+		04AC6625278B293100FDC00E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Nearby Mobility WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Nearby Mobility WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Nearby Mobility WatchKit Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					shared,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-Mobility.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Release;
+		};
+		04AC6628278B293100FDC00E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = Nearby_Mobility_WatchKit_Extension;
+				INFOPLIST_KEY_CFBundleDisplayName = "Nearby Mobility WatchKit App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-Mobility.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Debug;
+		};
+		04AC6629278B293100FDC00E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = Nearby_Mobility_WatchKit_Extension;
+				INFOPLIST_KEY_CFBundleDisplayName = "Nearby Mobility WatchKit App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-Mobility.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Release;
+		};
+		04AC662C278B293100FDC00E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-Mobility";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		04AC662D278B293100FDC00E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-Mobility";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		04AC662F278B293100FDC00E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-MobilityTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nearby Mobility WatchKit Extension.appex/Nearby Mobility WatchKit Extension";
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Debug;
+		};
+		04AC6630278B293100FDC00E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-MobilityTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nearby Mobility WatchKit Extension.appex/Nearby Mobility WatchKit Extension";
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Release;
+		};
+		04AC6632278B293100FDC00E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-MobilityUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Nearby Mobility WatchKit App";
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Debug;
+		};
+		04AC6633278B293100FDC00E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LSLRB83ZJP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "app.reitan.Nearby-MobilityUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Nearby Mobility WatchKit App";
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04AC65E8278B292F00FDC00E /* Build configuration list for PBXProject "Nearby Mobility" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AC6621278B293100FDC00E /* Debug */,
+				04AC6622278B293100FDC00E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04AC6623278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby Mobility WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AC6624278B293100FDC00E /* Debug */,
+				04AC6625278B293100FDC00E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04AC6627278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby Mobility WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AC6628278B293100FDC00E /* Debug */,
+				04AC6629278B293100FDC00E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04AC662B278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby Mobility" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AC662C278B293100FDC00E /* Debug */,
+				04AC662D278B293100FDC00E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04AC662E278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby MobilityTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AC662F278B293100FDC00E /* Debug */,
+				04AC6630278B293100FDC00E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04AC6631278B293100FDC00E /* Build configuration list for PBXNativeTarget "Nearby MobilityUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AC6632278B293100FDC00E /* Debug */,
+				04AC6633278B293100FDC00E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04AC65E5278B292F00FDC00E /* Project object */;
+}

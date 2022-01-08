@@ -1,5 +1,5 @@
 rootProject.name = "Nearby Mobility"
-include(":common")
+include(":shared")
 include(":app")
 
 pluginManagement {
