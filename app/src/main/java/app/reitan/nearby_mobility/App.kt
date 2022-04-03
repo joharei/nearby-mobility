@@ -2,12 +2,10 @@ package app.reitan.nearby_mobility
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.wear.compose.material.MaterialTheme
-import androidx.wear.compose.material.Scaffold
-import androidx.wear.compose.material.TimeText
-import androidx.wear.compose.material.TimeTextDefaults
+import androidx.wear.compose.material.*
 import app.reitan.nearby_mobility.features.map.ScooterMap
 
+@OptIn(ExperimentalWearMaterialApi::class)
 @Composable
 fun App() {
     Scaffold(

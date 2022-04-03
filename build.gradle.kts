@@ -15,12 +15,8 @@ allprojects {
 
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
-            freeCompilerArgs = kotlinOptions.freeCompilerArgs + listOf(
-                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xopt-in=kotlin.time.ExperimentalTime",
-                "-Xopt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi",
-                "-Xopt-in=androidx.wear.compose.material.ExperimentalWearMaterialApi"
-            )
+            freeCompilerArgs = kotlinOptions.freeCompilerArgs +
+                    "-opt-in=kotlin.RequiresOptIn"
             jvmTarget = JavaVersion.VERSION_11.toString()
         }
     }

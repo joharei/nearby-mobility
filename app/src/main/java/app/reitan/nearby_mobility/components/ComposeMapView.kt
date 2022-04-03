@@ -16,7 +16,6 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.ktx.awaitMap
 import com.google.maps.android.ktx.buildGoogleMapOptions
 import com.google.maps.android.ktx.cameraIdleEvents
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Composable

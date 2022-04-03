@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+    namespace = "app.reitan.common"
     compileSdk = Constants.CompileSdkVersion
 
     defaultConfig {

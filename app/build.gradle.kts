@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace = "app.reitan.nearby_mobility"
     compileSdk = Constants.CompileSdkVersion
 
     defaultConfig {
@@ -73,9 +74,9 @@ dependencies {
 
     implementation(Google.android.playServices.location)
     implementation(Google.android.playServices.maps)
-    implementation(Google.android.maps.mapsKtx)
-    implementation(Google.android.maps.mapsUtils)
-    implementation(Google.android.maps.mapsUtilsKtx)
+    implementation(Google.android.maps.ktx)
+    implementation(Google.android.maps.utils)
+    implementation(Google.android.maps.utils.ktx)
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.wear)

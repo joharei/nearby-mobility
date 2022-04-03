@@ -6,16 +6,15 @@ import app.reitan.common.models.LatLonBounds
 import app.reitan.common.models.Scooter
 import app.reitan.common.ryde.RydeApi
 import app.reitan.common.tools.distance
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.transformLatest
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalCoroutinesApi::class, ExperimentalTime::class)
 class Repository internal constructor(
     private val rydeApi: RydeApi,
     private val enturApi: EnturApi,

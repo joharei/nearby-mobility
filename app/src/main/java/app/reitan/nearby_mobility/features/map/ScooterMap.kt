@@ -10,10 +10,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.material.*
+import androidx.wear.compose.material.ChipDefaults
+import androidx.wear.compose.material.CompactChip
+import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.dialog.Alert
+import androidx.wear.compose.material.dialog.Dialog
 import app.reitan.nearby_mobility.R
 import app.reitan.nearby_mobility.components.ComposeMapView
 import app.reitan.nearby_mobility.components.rememberGoogleMapState
@@ -23,8 +29,9 @@ import app.reitan.nearby_mobility.tools.latLng
 import app.reitan.nearby_mobility.tools.latLonBounds
 import app.reitan.nearby_mobility.ui.LocalWearMode
 import app.reitan.nearby_mobility.ui.WearMode
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.permissions.PermissionRequired
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionStatus
+import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.MapView
@@ -33,6 +40,7 @@ import com.google.maps.android.clustering.ClusterManager
 import kotlinx.coroutines.flow.flowOf
 import org.koin.androidx.compose.getViewModel
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
     val wearMode = LocalWearMode.current
@@ -64,17 +72,16 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
     val googleMap = googleMapState.value
 
     val locationPermission = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
-    val systemInsets = LocalWindowInsets.current.systemBars
+    val systemInsets = WindowInsets.systemBars
+    val left = systemInsets.getLeft(LocalDensity.current, LocalLayoutDirection.current)
+    val top = systemInsets.getTop(LocalDensity.current)
+    val right = systemInsets.getRight(LocalDensity.current, LocalLayoutDirection.current)
+    val bottom = systemInsets.getBottom(LocalDensity.current)
     val bottomPaddingPx = with(LocalDensity.current) { 8.dp.roundToPx() }
     SideEffect {
-        googleMap?.setPadding(
-            systemInsets.left,
-            systemInsets.top,
-            systemInsets.right,
-            systemInsets.bottom + bottomPaddingPx,
-        )
+        googleMap?.setPadding(left, top, right, bottom + bottomPaddingPx)
         @SuppressLint("MissingPermission")
-        googleMap?.isMyLocationEnabled = locationPermission.hasPermission
+        googleMap?.isMyLocationEnabled = locationPermission.status.isGranted
     }
 
     val context = LocalContext.current
@@ -109,62 +116,69 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
     }
 
     var doNotShowRationale by rememberSaveable { mutableStateOf(false) }
-    PermissionRequired(
-        permissionState = locationPermission,
-        permissionNotGrantedContent = {
+    when (locationPermission.status) {
+        is PermissionStatus.Denied -> {
             if (doNotShowRationale) {
                 content()
             } else {
-                AlertDialog(
-                    title = {
-                        Text(
-                            text = stringResource(R.string.location_rationale_title),
-                            textAlign = TextAlign.Center,
-                        )
-                    },
-                    message = {
-                        Text(
-                            text = stringResource(R.string.location_rationale),
-                            textAlign = TextAlign.Center,
-                        )
-                    },
+                Dialog(
+                    onDismissRequest = {},
                 ) {
-                    CompactChip(
-                        modifier = Modifier.width(150.dp),
-                        onClick = locationPermission::launchPermissionRequest,
-                        label = { Text(stringResource(R.string.location_rationale_grant)) },
-                        colors = ChipDefaults.primaryChipColors(),
-                    )
-                    Spacer(Modifier.height(4.dp))
-                    CompactChip(
-                        modifier = Modifier.width(150.dp),
-                        onClick = { doNotShowRationale = true },
-                        label = { Text(stringResource(R.string.location_rationale_cancel)) },
-                        colors = ChipDefaults.secondaryChipColors(),
-                    )
+                    Alert(
+                        title = {
+                            Text(
+                                text = stringResource(R.string.location_rationale_title),
+                                textAlign = TextAlign.Center,
+                            )
+                        },
+                        message = {
+                            Text(
+                                text = stringResource(R.string.location_rationale),
+                                textAlign = TextAlign.Center,
+                            )
+                        },
+                    ) {
+                        item {
+                            CompactChip(
+                                modifier = Modifier.width(150.dp),
+                                onClick = locationPermission::launchPermissionRequest,
+                                label = { Text(stringResource(R.string.location_rationale_grant)) },
+                                colors = ChipDefaults.primaryChipColors(),
+                            )
+                        }
+                        item { Spacer(Modifier.height(4.dp)) }
+                        item {
+                            CompactChip(
+                                modifier = Modifier.width(150.dp),
+                                onClick = { doNotShowRationale = true },
+                                label = { Text(stringResource(R.string.location_rationale_cancel)) },
+                                colors = ChipDefaults.secondaryChipColors(),
+                            )
+                        }
+                    }
                 }
-            }
-        },
-        permissionNotAvailableContent = content,
-    ) {
-        var gotLocation by rememberSaveable { mutableStateOf(false) }
-        LaunchedEffect(context, gotLocation, googleMap) {
-            if (!gotLocation && googleMap != null) {
-                @SuppressLint("MissingPermission")
-                val lastLocation = lastLocation(context)
-                if (lastLocation != null) {
-                    googleMap.moveCamera(
-                        CameraUpdateFactory.newLatLngZoom(lastLocation.latLng, 16f)
-                    )
-                }
-                gotLocation = true
             }
         }
-        Box {
-            content()
-            Crossfade(gotLocation) {
-                if (!it) {
-                    Box(modifier = Modifier.background(MaterialTheme.colors.background))
+        PermissionStatus.Granted -> {
+            var gotLocation by rememberSaveable { mutableStateOf(false) }
+            LaunchedEffect(context, gotLocation, googleMap) {
+                if (!gotLocation && googleMap != null) {
+                    @SuppressLint("MissingPermission")
+                    val lastLocation = lastLocation(context)
+                    if (lastLocation != null) {
+                        googleMap.moveCamera(
+                            CameraUpdateFactory.newLatLngZoom(lastLocation.latLng, 16f)
+                        )
+                    }
+                    gotLocation = true
+                }
+            }
+            Box {
+                content()
+                Crossfade(gotLocation) {
+                    if (!it) {
+                        Box(modifier = Modifier.background(MaterialTheme.colors.background))
+                    }
                 }
             }
         }

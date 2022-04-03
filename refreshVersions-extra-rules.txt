@@ -1,14 +1,5 @@
 androidx.compose.*:*
 ^^^^^^^^.^^^^^^^
 
-androidx.compose.compiler:compiler
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
 androidx.wear.compose:compose(-*)
 ^^^^^^^^.^^^^.^^^^^^^.^^^^^^^
-
-com.google.maps.android:maps-utils-ktx
-    ^^^^^^^^^^^^                   ^^^
-
-com.google.maps.android:maps-ktx
-    ^^^^^^^^^^^^             ^^^
