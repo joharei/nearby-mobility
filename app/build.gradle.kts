@@ -27,7 +27,7 @@ android {
         viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = versionFor("version.androidx.compose.compiler")
+        kotlinCompilerExtensionVersion = versionFor("version.androidx.compose")
     }
 
     signingConfigs {
