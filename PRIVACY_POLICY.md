@@ -1,6 +1,6 @@
 **Privacy Policy**
 
-This privacy policy is applicable to the Skip Ohoi! app (hereinafter referred to as "Application") for mobile devices, which was developed by Johan Reitan (hereinafter referred to as "Service Provider") as a an Open Source service. This service is provided "AS IS".
+This privacy policy is applicable to the Nearby Mobility app (hereinafter referred to as "Application") for mobile devices, which was developed by Johan Reitan (hereinafter referred to as "Service Provider") as a an Open Source service. This service is provided "AS IS".
 
 **What information does the Application obtain and how is it used?**  
 **User Provided Information**
