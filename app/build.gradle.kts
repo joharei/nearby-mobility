@@ -1,8 +1,6 @@
-import de.fayard.refreshVersions.core.versionFor
-
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -27,7 +25,7 @@ android {
         viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = versionFor("version.androidx.compose")
+        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
 
     signingConfigs {
@@ -65,36 +63,40 @@ android {
 dependencies {
     implementation(project(":common"))
 
-    implementation(kotlin("stdlib"))
-    implementation(KotlinX.coroutines.android)
-    implementation(KotlinX.coroutines.playServices)
-    implementation(Koin.core)
-    implementation(Koin.android)
-    implementation(Koin.compose)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.play.services)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
-    implementation(Google.android.playServices.location)
-    implementation(Google.android.playServices.maps)
-    implementation(Google.android.maps.ktx)
-    implementation(Google.android.maps.utils)
-    implementation(Google.android.maps.utils.ktx)
+    implementation(libs.google.android.play.services.location)
+    implementation(libs.google.android.play.services.maps)
+    implementation(libs.google.android.maps.ktx)
+    implementation(libs.google.android.maps.utils)
+    implementation(libs.google.android.maps.utils.ktx)
 
-    implementation(AndroidX.core.ktx)
-    implementation(AndroidX.wear)
-    implementation(AndroidX.activity.ktx)
-    implementation(AndroidX.fragment.ktx)
-    implementation(AndroidX.lifecycle.viewModelCompose)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.wear)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Compose
-    implementation(AndroidX.compose.compiler)
-    implementation(AndroidX.compose.runtime)
-    implementation(AndroidX.compose.ui)
-    implementation(AndroidX.compose.ui.tooling)
-    implementation(AndroidX.compose.foundation)
-    implementation(AndroidX.compose.foundation.layout)
-    implementation(AndroidX.compose.material.icons.core)
-    implementation(AndroidX.compose.material.icons.extended)
-    implementation(AndroidX.wear.compose.material)
-    implementation(AndroidX.activity.compose)
-    implementation(Google.accompanist.insets)
-    implementation(Google.accompanist.permissions)
+//    implementation(libs.compose.compiler)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.foundation.layout)
+    implementation(libs.compose.material.icons.core)
+    implementation(libs.compose.material.icons.extended)
+    implementation(libs.androidx.wear.compose.material)
+    implementation(libs.activity.compose)
+
+    // Deprecated because insets APIs are now directly in androidx.navigation.compose.
+    //FIXME: Migrate using the following guide:
+    // https://google.github.io/accompanist/insets/
+    implementation(libs.accompanist.insets)
+    implementation(libs.accompanist.permissions)
 }
