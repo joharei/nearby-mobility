@@ -11,4 +11,6 @@ class ScooterClusterItem(val scooter: Scooter) : ClusterItem {
     override fun getTitle(): String? = null
 
     override fun getSnippet(): String? = null
+
+    override fun getZIndex(): Float? = null
 }

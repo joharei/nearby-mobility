@@ -6,13 +6,14 @@ plugins {
 
 android {
     namespace = "app.reitan.common"
-    compileSdk = Constants.CompileSdkVersion
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
-        minSdk = Constants.MinSdkVersion
-        targetSdk = Constants.TargetSdkVersion
+        minSdk = libs.versions.minSdkVersion.get().toInt()
         consumerProguardFile("proguard-rules.pro")
     }
+
+    testOptions.targetSdk = libs.versions.targetSdkVersion.get().toInt()
 }
 
 dependencies {

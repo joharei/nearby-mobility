@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "app.reitan.nearby_mobility"
-    compileSdk = Constants.CompileSdkVersion
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
         applicationId = "app.reitan.nearby_mobility"
-        minSdk = Constants.MinSdkVersion
-        targetSdk = Constants.TargetSdkVersion
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.targetSdkVersion.get().toInt()
         versionCode = System.getenv("BUILD_NUMBER")?.toIntOrNull() ?: 1
         versionName = "1.0"
 

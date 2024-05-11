@@ -1,5 +1,4 @@
 import com.android.build.gradle.BaseExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -8,12 +7,13 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
 }
 
+val javaVersion = JavaVersion.VERSION_17
 allprojects {
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             freeCompilerArgs = kotlinOptions.freeCompilerArgs +
                     "-opt-in=kotlin.RequiresOptIn"
-            jvmTarget = JavaVersion.VERSION_11.toString()
+            jvmTarget = javaVersion.toString()
         }
     }
 
@@ -21,13 +21,8 @@ allprojects {
         plugins.withType<BasePlugin> {
             configure<BaseExtension> {
                 compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_11
-                    targetCompatibility = JavaVersion.VERSION_11
-                }
-            }
-            configure<KotlinAndroidProjectExtension> {
-                jvmToolchain {
-                    (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(11))
+                    sourceCompatibility = javaVersion
+                    targetCompatibility = javaVersion
                 }
             }
         }
@@ -35,7 +30,7 @@ allprojects {
 }
 
 task<Delete>("clean") {
-    delete(rootProject.buildDir)
+    delete(rootProject.layout.buildDirectory)
 }
 
 tasks.getByName<Wrapper>("wrapper") {

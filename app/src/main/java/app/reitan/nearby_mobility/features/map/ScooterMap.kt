@@ -4,9 +4,22 @@ import android.Manifest
 import android.annotation.SuppressLint
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -38,11 +51,11 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 import kotlinx.coroutines.flow.flowOf
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
+fun ScooterMap(viewModel: ScooterMapViewModel = koinViewModel()) {
     val wearMode = LocalWearMode.current
     val scooters by remember(wearMode) {
         when (wearMode) {
@@ -100,6 +113,7 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
                 mapView?.onExitAmbient()
                 googleMap?.uiSettings?.isZoomControlsEnabled = true
             }
+
             is WearMode.Ambient -> {
                 mapView?.onEnterAmbient(wearMode.ambientDetails)
                 googleMap?.uiSettings?.isZoomControlsEnabled = false
@@ -122,6 +136,7 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
                 content()
             } else {
                 Dialog(
+                    showDialog = true,
                     onDismissRequest = {},
                 ) {
                     Alert(
@@ -159,6 +174,7 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
                 }
             }
         }
+
         PermissionStatus.Granted -> {
             var gotLocation by rememberSaveable { mutableStateOf(false) }
             LaunchedEffect(context, gotLocation, googleMap) {
@@ -175,7 +191,7 @@ fun ScooterMap(viewModel: ScooterMapViewModel = getViewModel()) {
             }
             Box {
                 content()
-                Crossfade(gotLocation) {
+                Crossfade(gotLocation, label = "Got location") {
                     if (!it) {
                         Box(modifier = Modifier.background(MaterialTheme.colors.background))
                     }
