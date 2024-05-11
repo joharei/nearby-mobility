@@ -70,10 +70,8 @@ dependencies {
     implementation(libs.koin.compose)
 
     implementation(libs.google.android.play.services.location)
-    implementation(libs.google.android.play.services.maps)
-    implementation(libs.google.android.maps.ktx)
-    implementation(libs.google.android.maps.utils)
-    implementation(libs.google.android.maps.utils.ktx)
+    implementation(libs.google.android.maps.compose)
+    implementation(libs.google.android.maps.compose.utils)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.wear)
@@ -82,7 +80,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Compose
-//    implementation(libs.compose.compiler)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.runtime)
     implementation(libs.compose.ui)
@@ -94,9 +91,5 @@ dependencies {
     implementation(libs.androidx.wear.compose.material)
     implementation(libs.activity.compose)
 
-    // Deprecated because insets APIs are now directly in androidx.navigation.compose.
-    //FIXME: Migrate using the following guide:
-    // https://google.github.io/accompanist/insets/
-    implementation(libs.accompanist.insets)
     implementation(libs.accompanist.permissions)
 }

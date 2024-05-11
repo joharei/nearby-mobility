@@ -19,8 +19,8 @@ class MainActivity : FragmentActivity(), AmbientModeSupport.AmbientCallbackProvi
 
     private var ambientMode: WearMode by mutableStateOf(WearMode.Active)
 
-    public override fun onCreate(savedState: Bundle?) {
-        super.onCreate(savedState)
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         ActivityMainBinding.inflate(layoutInflater).apply {
             setContentView(root)

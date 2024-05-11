@@ -25,7 +25,7 @@ class Repository internal constructor(
         .transformLatest { visibleRegion ->
             coroutineScope {
                 do {
-                    val scooters = listOf(rydeApi, enturApi)
+                    val scooters = listOf(/*rydeApi, */enturApi)
                         .map { async { fetchScooters(it, visibleRegion) } }
                         .awaitAll()
                         .flatten()
