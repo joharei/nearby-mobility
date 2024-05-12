@@ -11,14 +11,11 @@ internal enum class Operator {
     @SerialName("YTI:Operator:Tier")
     Tier,
 
-    @SerialName("YZV:Operator:zvipp")
-    Zvipp,
-
-    @SerialName("YLI:Operator:lime")
-    Lime,
-
     @SerialName("YBO:Operator:bolt")
     Bolt,
+
+    @SerialName("YRY:Operator:Ryde")
+    Ryde,
 
     Unknown,
 }

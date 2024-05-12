@@ -3,7 +3,6 @@ package app.reitan.common.di
 import android.util.Log
 import app.reitan.common.Repository
 import app.reitan.common.entur.EnturApi
-import app.reitan.common.ryde.RydeApi
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.*
@@ -22,8 +21,7 @@ fun initKoin(enableNetworkLogs: Boolean = true, appDeclaration: KoinAppDeclarati
 fun commonModule(enableNetworkLogs: Boolean) = module {
     single { createJson() }
     single { createHttpClient(get(), enableNetworkLogs = enableNetworkLogs) }
-    single { Repository(get(), get()) }
-    single { RydeApi(get()) }
+    single { Repository(get()) }
     single { EnturApi(get()) }
 }
 

@@ -50,9 +50,8 @@ internal class EnturApi(private val client: HttpClient) : ScooterApi {
                     when (it.system.operator.id) {
                         EnturOperator.Voi -> Operator.Voi
                         EnturOperator.Tier -> Operator.Tier
-                        EnturOperator.Zvipp -> Operator.Zvipp
-                        EnturOperator.Lime -> Operator.Lime
                         EnturOperator.Bolt -> Operator.Bolt
+                        EnturOperator.Ryde -> Operator.Ryde
                         EnturOperator.Unknown -> Operator.Unknown
                     },
                     LatLon(it.lat, it.lon),
