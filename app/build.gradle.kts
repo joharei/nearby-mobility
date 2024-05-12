@@ -1,6 +1,9 @@
+import io.github.reactivecircus.appversioning.toSemVer
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.app.versioning)
 }
 
 android {
@@ -92,4 +95,21 @@ dependencies {
     implementation(libs.activity.compose)
 
     implementation(libs.accompanist.permissions)
+}
+
+appVersioning {
+    overrideVersionName { gitTag, _, variantInfo ->
+        val version = gitTag.rawTagName.drop(1)
+        if (gitTag.commitsSinceLatestTag == 0) {
+            version
+        } else {
+            "$version-${gitTag.commitsSinceLatestTag}-${gitTag.commitHash}"
+        }.let {
+            if (variantInfo.isDebugBuild) "$it-DEBUG" else it
+        }
+    }
+    overrideVersionCode { gitTag, _, _ ->
+        val semVer = gitTag.toSemVer(allowPrefixV = true)
+        semVer.major * 10000000 + semVer.minor * 100000 + semVer.patch * 100 + gitTag.commitsSinceLatestTag
+    }
 }
