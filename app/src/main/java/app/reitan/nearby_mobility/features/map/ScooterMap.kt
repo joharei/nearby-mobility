@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -21,12 +22,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
+import androidx.wear.compose.foundation.rememberActiveFocusRequester
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.MaterialTheme
@@ -54,7 +59,10 @@ import com.google.maps.android.compose.clustering.Clustering
 import com.google.maps.android.compose.rememberCameraPositionState
 import org.koin.androidx.compose.koinViewModel
 
-@OptIn(ExperimentalPermissionsApi::class, MapsComposeExperimentalApi::class)
+@OptIn(
+    ExperimentalPermissionsApi::class, MapsComposeExperimentalApi::class,
+    ExperimentalWearFoundationApi::class
+)
 @Composable
 fun ScooterMap(viewModel: ScooterMapViewModel = koinViewModel()) {
     val scooters by viewModel.scooters.collectAsStateWithLifecycle(
@@ -89,11 +97,19 @@ fun ScooterMap(viewModel: ScooterMapViewModel = koinViewModel()) {
         )
     }
 
-    val uiSettings = remember { MapUiSettings() }
+    val uiSettings = remember { MapUiSettings(zoomControlsEnabled = false) }
 
     val content = @Composable {
+        val focusRequester = rememberActiveFocusRequester()
         GoogleMap(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .onRotaryScrollEvent {
+                    cameraPositionState.move(CameraUpdateFactory.zoomBy(it.verticalScrollPixels / 100f))
+                    true
+                }
+                .focusRequester(focusRequester)
+                .focusable(),
             cameraPositionState = cameraPositionState,
             googleMapOptionsFactory = { googleMapOptions },
             properties = properties,
