@@ -13,10 +13,6 @@ inputs:
   keyPassword:
     description: The password for the key
     required: true
-  variant:
-    description: The variant to build
-    required: false
-    default: prodRealBleRelease
 outputs:
   signedFile:
     description: The signed AAB
@@ -44,8 +40,8 @@ runs:
     - name: Post version name and code to summary
       shell: bash
       run: |
-        VERSION_CODE=$(cat app/build/outputs/app_versioning/${{ inputs.variant }}/version_code.txt)
-        VERSION_NAME=$(cat app/build/outputs/app_versioning/${{ inputs.variant }}/version_name.txt)
+        VERSION_CODE=$(cat app/build/outputs/app_versioning/release/version_code.txt)
+        VERSION_NAME=$(cat app/build/outputs/app_versioning/release/version_name.txt)
         echo "### Generated version" >> $GITHUB_STEP_SUMMARY
         echo "Generated app version code: $VERSION_CODE" >> $GITHUB_STEP_SUMMARY
         echo "Generated app version name: \"$VERSION_NAME\"" >> $GITHUB_STEP_SUMMARY
@@ -58,7 +54,7 @@ runs:
       uses: ilharp/sign-android-release@v1
       id: sign_app
       with:
-        releaseDir: app/build/outputs/bundle/${{ inputs.variant }}
+        releaseDir: app/build/outputs/bundle/release
         signingKey: ${{ inputs.signingKey }}
         keyAlias: ${{ inputs.keyAlias }}
         keyStorePassword: ${{ inputs.keyStorePassword }}
