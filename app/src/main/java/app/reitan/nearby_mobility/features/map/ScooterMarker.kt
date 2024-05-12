@@ -60,12 +60,14 @@ fun ScooterMarker(@PreviewParameter(OperatorParameterProvider::class) operator: 
             Operator.Ryde -> Color(0xFF6DB85E)
             Operator.Tier -> Color(0xFF00103C)
             Operator.Voi -> Color(0xFFF46C62)
+            Operator.Bolt -> Color(0xFF34D186)
             else -> Color.Transparent
         }
         val icon = when (operator) {
             Operator.Ryde -> R.drawable.ic_ryde
             Operator.Tier -> R.drawable.ic_tier
             Operator.Voi -> R.drawable.ic_voi
+            Operator.Bolt -> R.drawable.ic_bolt
             else -> null
         }
 
@@ -88,6 +90,7 @@ class OperatorParameterProvider : CollectionPreviewParameterProvider<Operator>(
         Operator.Ryde,
         Operator.Tier,
         Operator.Voi,
+        Operator.Bolt,
         Operator.Unknown,
     )
 )
