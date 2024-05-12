@@ -5,7 +5,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.*
 import app.reitan.nearby_mobility.features.map.ScooterMap
 
-@OptIn(ExperimentalWearMaterialApi::class)
 @Composable
 fun App() {
     Scaffold(
