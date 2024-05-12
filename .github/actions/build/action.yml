@@ -29,7 +29,7 @@ runs:
     - name: Set up Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
-        cache-read-only: ${{ github.ref != 'refs/heads/dev' }}
+        cache-read-only: ${{ github.ref != 'refs/heads/master' }}
 
     - name: Generate version
       shell: bash
