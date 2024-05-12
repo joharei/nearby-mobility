@@ -20,4 +20,4 @@
 # hide the original source file name.
 -renamesourcefileattribute SourceFile
 
--keep,allowoptimization class com.google.android.libraries.maps.** { *; }
+-dontwarn org.slf4j.impl.StaticLoggerBinder

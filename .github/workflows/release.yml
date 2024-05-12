@@ -1,0 +1,88 @@
+name: Build and release a new version
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: "The type of release (one of 'patch', 'minor', or 'major')"
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+  push:
+    tags:
+      - v**
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: read
+
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout ZapAppAndroid
+
+      - name: Set git user
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+
+      - name: Bump version
+        id: bump
+        if: github.event_name == 'workflow_dispatch'
+        uses: zwaldowski/semver-release-action@v3
+        with:
+          bump: ${{ github.event.inputs.release_type }}
+          prefix: v
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Don't want to push the tag at this point
+          dry_run: true
+
+      - name: Create tag
+        if: github.event_name == 'workflow_dispatch'
+        run: git tag ${{ steps.bump.outputs.version_tag }}
+
+      - name: Build release bundle
+        id: build
+        uses: ./.github/actions/build
+        with:
+          signingKey: ${{ secrets.SIGNING_KEY }}
+          keyAlias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Deploy to Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          packageName: app.reitan.nearby_mobility
+          releaseFiles: ${{ steps.build.outputs.signedFile }}
+          mappingFile: app/build/outputs/mapping/release/mapping.txt
+          track: internal
+          status: completed
+
+      - name: Push tag
+        if: github.event_name == 'workflow_dispatch'
+        run: git push --follow-tags
+
+      - name: Create GitHub release from bump
+        if: github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.bump.outputs.version_tag }}
+          generate_release_notes: true
+
+      - name: Create GitHub release from tag
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true

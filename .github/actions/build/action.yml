@@ -1,0 +1,66 @@
+name: Build release bundle
+description: Generates version numbers, builds a bundle and signs it
+inputs:
+  signingKey:
+    description: The key used to sign your release in base64 encoded format
+    required: true
+  keyAlias:
+    description: The key alias
+    required: true
+  keyStorePassword:
+    description: The password to the keystore
+    required: true
+  keyPassword:
+    description: The password for the key
+    required: true
+  variant:
+    description: The variant to build
+    required: false
+    default: prodRealBleRelease
+outputs:
+  signedFile:
+    description: The signed AAB
+    value: ${{ steps.sign_app.outputs.signedFile }}
+runs:
+  using: composite
+  steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'zulu'
+
+    - name: Set up Gradle
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        cache-read-only: ${{ github.ref != 'refs/heads/dev' }}
+
+    - name: Generate version
+      shell: bash
+      env:
+        TOKEN: ${{ inputs.patReadPackages }}
+      run: ./gradlew generateAppVersionInfoForRelease
+
+    - name: Post version name and code to summary
+      shell: bash
+      run: |
+        VERSION_CODE=$(cat app/build/outputs/app_versioning/${{ inputs.variant }}/version_code.txt)
+        VERSION_NAME=$(cat app/build/outputs/app_versioning/${{ inputs.variant }}/version_name.txt)
+        echo "### Generated version" >> $GITHUB_STEP_SUMMARY
+        echo "Generated app version code: $VERSION_CODE" >> $GITHUB_STEP_SUMMARY
+        echo "Generated app version name: \"$VERSION_NAME\"" >> $GITHUB_STEP_SUMMARY
+
+    - name: Build release AAB
+      shell: bash
+      run: ./gradlew app:bundleRelease --scan
+
+    - name: Sign AAB
+      uses: ilharp/sign-android-release@v1
+      id: sign_app
+      with:
+        releaseDir: app/build/outputs/bundle/${{ inputs.variant }}
+        signingKey: ${{ inputs.signingKey }}
+        keyAlias: ${{ inputs.keyAlias }}
+        keyStorePassword: ${{ inputs.keyStorePassword }}
+        keyPassword: ${{ inputs.keyPassword }}
+        buildToolsVersion: 34.0.0
