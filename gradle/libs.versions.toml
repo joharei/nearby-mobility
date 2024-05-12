@@ -15,7 +15,7 @@ app-versioning = { id = "io.github.reactivecircus.app-versioning", version.ref =
 # SDK versions
 compileSdkVersion = "34"
 minSdkVersion = "25"
-targetSdkVersion = "34"
+targetSdkVersion = "33"
 
 agp = "8.4.0"
 kotlin = "1.9.23"
