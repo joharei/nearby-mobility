@@ -83,6 +83,7 @@ dependencies {
     implementation(libs.activity.compose)
 
     implementation(libs.accompanist.permissions)
+    implementation(libs.horologist.compose.tools)
 }
 
 appVersioning {
